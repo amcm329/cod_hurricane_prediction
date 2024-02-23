@@ -85,26 +85,19 @@ input[type="range"]:focus::-moz-range-thumb {
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
     <h3>Parameters</h3>
     <hr>
-    <form action="/action_page.php" target="_blank">
+    <form action="{{ url_for('main') }}" method="POST">
       <p><label><i class="fa fa-globe"></i> Latitude</label></p>
-      <input class="w3-input w3-border" type="number" value="0.0000" name="Latitude" min="-90" max="90" step="0.0001" required>      
+      <input class="w3-input w3-border" type="number" value="0.0000" name="latitude" min="-90" max="90" step="0.0001" required>      
       <p><label><i class="fa fa-globe"></i> Longitude</label></p>
-      <input class="w3-input w3-border" type="number" value="0.0000" name="Longitude" min="-180" max="180" step="0.0001" required>       
+      <input class="w3-input w3-border" type="number" value="0.0000" name="longitude" min="-180" max="180" step="0.0001" required>       
       <p><label><i class="fa fa-area-chart"></i> Pressure</label></p>
-      <input type="range" value="100" name="Pressure" min="100" max="1050" step="1" oninput="this.nextElementSibling.value = this.value" required><output>100</output>          
+      <input type="range" value="100" name="pressure" min="100" max="1050" step="1" oninput="this.nextElementSibling.value = this.value" required><output>100</output>          
       <p><label><i class="fa fa-area-chart"></i> Wind Speed</label></p>
-      <input type="range" value="0" name="Wind Speed" min="0" max="150" step="5" oninput="this.nextElementSibling.value = this.value" required><output>0</output> 
+      <input type="range" value="0" name="windspeed" min="0" max="150" step="5" oninput="this.nextElementSibling.value = this.value" required><output>0</output> 
       <p><button class="w3-button w3-block w3-green w3-center-align" type="submit"><i class="fa fa-search w3-margin-right"></i> Calculate</button></p>
-      <p><button class="w3-button w3-block w3-red w3-center-align" type="submit"><i class="fa fa-trash-o"></i> Clear Values</button></p>
     </form>
   </div>
 </nav>
-
-<!-- Top menu on small screens -->
-<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <span class="w3-bar-item">Rental</span>
-  <a href="javascript:void(0)" class="w3-right w3-bar-item w3-button" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-</header>
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
@@ -119,88 +112,34 @@ input[type="range"]:focus::-moz-range-thumb {
   <div class="w3-container" id="apartment">
     <h2 class="w3-text-blue">Hurricane Predictor : Exe-Catl</h2>
     <div class="w3-display-container mySlides">
-    <img src="/app/img/map_world.jpeg" style="width:100%;margin-bottom:-6px">
+    <img src="/app/web_page/img/map_world.jpeg" style="width:100%;margin-bottom:-6px">
       <div class="w3-display-bottomleft w3-container w3-black">
         <p>Location</p>
       </div>
     </div>
   </div>
   <hr>
+  
+  <div class="result" align="center">
+      {% if result %}
+          {% for variable, value in original_input.items() %}
+              <b>{{ variable }}</b> : {{ value }}
+          {% endfor %}
+          <br>
+          <br> Maximum Wind Speed Predicted:
+             <p style="font-size:50px">{{ result }}</p>
+      {% endif %}
+  </div>
 
-  <div class="w3-container">
-    <h5><strong>The space</strong></h5>
-    <div class="w3-row w3-large">
-      <div class="w3-col s6">
-        <p><i class="fa fa-fw fa-male"></i> Max people: 4</p>
-        <p><i class="fa fa-fw fa-bath"></i> Bathrooms: 2</p>
-        <p><i class="fa fa-fw fa-bed"></i> Bedrooms: 1</p>
-      </div>
-      <div class="w3-col s6">
-        <p><i class="fa fa-fw fa-clock-o"></i> Check In: After 3PM</p>
-        <p><i class="fa fa-fw fa-clock-o"></i> Check Out: 12PM</p>
-      </div>
-    </div>
-    <hr>
-    
-    <h4><strong>Amenities</strong></h4>
-    <div class="w3-row w3-large">
-      <div class="w3-col s6">
-        <p><i class="fa fa-fw fa-shower"></i> Shower</p>
-        <p><i class="fa fa-fw fa-wifi"></i> WiFi</p>
-        <p><i class="fa fa-fw fa-tv"></i> TV</p>
-      </div>
-      <div class="w3-col s6">
-        <p><i class="fa fa-fw fa-cutlery"></i> Kitchen</p>
-        <p><i class="fa fa-fw fa-thermometer"></i> Heating</p>
-        <p><i class="fa fa-fw fa-wheelchair"></i> Accessible</p>
-      </div>
-    </div>
-    <hr>
-    
     <h4><strong>Help</strong></h4>
     <p>If the program does not work properly, please try to enter the coordinates correctly (numeric values up to 4 digits and within an acceptable range). </p>
     <hr>
     
     <h4><strong>About Model</strong></h4>
-    <p>The model was built using historical information on hurricanes recorded by the <a href="https://www.nhc.noaa.gov/">National Hurricane Center Tropical Cyclone Report</a> complemented with information from <a href="https://meteostat.net/es/">Meteostat</a> together with an LTSM algorithm to recognize the intensity and changes that a hurricane may present and anticipate its category.</p>
-    <p>Subscribe to receive updates on available dates and special offers.</p>
-    <p><button class="w3-button w3-green w3-third" onclick="document.getElementById('subscribe').style.display='block'">Subscribe</button></p>
+    <p>The model was built using historical information on hurricanes recorded by the <a href="https://www.nhc.noaa.gov/">National Hurricane Center</a> complemented with information from <a href="https://meteostat.net/es/">Meteostat</a> together with an LTSM algorithm to recognize the intensity and changes that a hurricane may present and anticipate its category.</p>
   </div>
   <hr>
   
-  <!-- Contact -->
-  <div class="w3-container" id="contact">
-    <h2>Contact</h2>
-    <i class="fa fa-map-marker" style="width:30px"></i> Chicago, US<br>
-    <i class="fa fa-phone" style="width:30px"></i> Phone: +00 151515<br>
-    <i class="fa fa-envelope" style="width:30px"> </i> Email: mail@mail.com<br>
-    <p>Questions? Go ahead, ask them:</p>
-    <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
-      <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
-    <button type="submit" class="w3-button w3-green w3-third">Send a Message</button>
-    </form>
-  </div>
-  
-  <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></footer>
-
-<!-- End page content -->
-</div>
-
-<!-- Subscribe Modal -->
-<div id="subscribe" class="w3-modal">
-  <div class="w3-modal-content w3-animate-zoom w3-padding-large">
-    <div class="w3-container w3-white w3-center">
-      <i onclick="document.getElementById('subscribe').style.display='none'" class="fa fa-remove w3-button w3-xlarge w3-right w3-transparent"></i>
-      <h2 class="w3-wide">SUBSCRIBE</h2>
-      <p>Join our mailing list to receive updates on available dates and special offers.</p>
-      <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
-      <button type="button" class="w3-button w3-padding-large w3-green w3-margin-bottom" onclick="document.getElementById('subscribe').style.display='none'">Subscribe</button>
-    </div>
-  </div>
-</div>
-
 <script>
 // Script to open and close sidebar when on tablets and phones
 function w3_open() {
