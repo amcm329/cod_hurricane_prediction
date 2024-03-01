@@ -82,22 +82,7 @@ tasks:
   ################ Build and Deploy sections ###############
   #---------------------------------------------------------
 
-  - type: build_model
-    name: Build Sample model
-    entity_label: sample-model-entity-label
-    comment: First build by the AMP
-    examples:
-      - request:
-          prompt: What is Cloudera?
-          temperature: 0
-          max_new_tokens: 50
-          repetition_penalty: 0.5
 
-    target_file_path: scripts/model_serve.py
-    target_function_name: predict_cancelled
-
-  - type: deploy_model
-    entity_label: sample-model-entity-label
     
   #---------------------------------------------------------
   ################### Application section ##################
