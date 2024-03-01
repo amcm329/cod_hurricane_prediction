@@ -92,7 +92,7 @@ tasks:
     target_file_path: scripts/model_serve.py
     target_function_name: predict_cancelled
     environment_variables:
-    TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
+    TASK_TYPE: BUILD/DEPLOY_MODEL
 
 #  - type: deploy_model
 #    name: flight_prediction_model
