@@ -2,7 +2,7 @@
 # Install the requirements
 
 !pip install --upgrade pip
-!pip install --no-cache-dir --log --progress-bar off scripts/pip-req.log -r requirements.txt
+!pip install --no-cache-dir --progress-bar off -r requirements.txt
 
 import os
 import json
