@@ -1,4 +1,7 @@
-
+#---------------------------------------------------------
+################# General Aspects section ################
+#---------------------------------------------------------
+  
 name: CECALT - CEnter of MeteorologiCAL Technology
 description: CECALT is an integral solution which contributes to hurricane prediction sensitivity.
 author:  Aaron Castillo, Javier Sanchez, Gilberto Subias.
