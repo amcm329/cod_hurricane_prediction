@@ -14,10 +14,10 @@ app = flask.Flask(__name__, template_folder='app')
 
 #Check path
 #This starts with slash
-@app.route('/app/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def main():
     if flask.request.method == 'GET':
-        return(flask.render_template('index.html'))
+        return(flask.render_template('app/index.html'))
     if flask.request.method == 'POST':
         latitude = flask.request.form['latitude']
         longitude = flask.request.form['longitude']
@@ -26,7 +26,7 @@ def main():
         input_variables = [[latitude, longitude, pressure]]
         # Falta scaler ojo!
         prediction = model.predict(input_variables)[0]
-        return flask.render_template('index.html',
+        return flask.render_template('app/index.html',
                                      original_input = {'Latitude':latitude,'Longitude':longitude,'Pressure':pressure},
                                      result=prediction)
 if __name__ == '__main__':
