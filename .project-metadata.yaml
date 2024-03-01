@@ -81,22 +81,23 @@ tasks:
   #---------------------------------------------------------
   ################ Build and Deploy sections ###############
   #---------------------------------------------------------
-  
+
   - type: build_model
-    name: Flight Delay Prediction Model API Endpoint
-    entity_label: flight_model
-    comment: Build flight prediction model
+    name: Build Sample model
+    entity_label: sample-model-entity-label
+    comment: First build by the AMP
     examples:
-      - request: { "feature": "US,DCA,BOS,1,16" }
-        response: 1
+      - request:
+          prompt: What is Cloudera?
+          temperature: 0
+          max_new_tokens: 50
+          repetition_penalty: 0.5
+
     target_file_path: scripts/model_serve.py
     target_function_name: predict_cancelled
 
-#  - type: deploy_model
-#    name: flight_prediction_model
-#    entity_label: flight_model
-#    cpu: 1
-#    gpu: 0
+  - type: deploy_model
+    entity_label: sample-model-entity-label
     
   #---------------------------------------------------------
   ################### Application section ##################
