@@ -4,9 +4,18 @@
 <title>AMP Hurricane Predictor</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""></script>
+
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 .mySlides {display: none}
@@ -113,6 +122,14 @@ input[type="range"]:focus::-moz-range-thumb {
     <h2 class="w3-text-blue">Hurricane Predictor : Exe-Catl</h2>
     <div class="w3-display-container mySlides">
     <img src="/static/map_world.jpeg" style="width:100%;margin-bottom:-6px">
+    <div id="map" style="width: 600px; height: 400px;"></div>
+    <script>
+      const map = L.map('map').setView([40, 34], 13);
+      const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 2,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+    </script>
       <div class="w3-display-bottomleft w3-container w3-black">
         <p>Location</p>
       </div>
