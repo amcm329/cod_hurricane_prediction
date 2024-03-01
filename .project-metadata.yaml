@@ -82,26 +82,7 @@ tasks:
   ################ Build and Deploy sections ###############
   #---------------------------------------------------------
   
-  - type: build_model
-    name: Flight Delay Prediction Model API Endpoint
-    entity_label: flight_model
-    comment: Build flight prediction model
-    examples:
-      - request: { "feature": "US,DCA,BOS,1,16" }
-        response: 1
-    target_file_path: scripts/model_serve.py
-    target_function_name: predict_cancelled
-    environment_variables:
-      TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
 
-  - type: deploy_model
-    name: flight_prediction_model
-    entity_label: flight_model
-    cpu: 1
-    gpu: 0
-    environment_variables:
-      TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
-    
   #---------------------------------------------------------
   ################### Application section ##################
   #---------------------------------------------------------
