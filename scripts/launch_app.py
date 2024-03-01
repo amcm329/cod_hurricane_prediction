@@ -4,14 +4,14 @@ import pickle
 
 # Use pickle to load in the pre-trained model.
 
-with open(f'src/prebuilt-models/best_model_tuned.pkl','rb') as f:
+with open(f'/src/prebuilt-models/best_model_tuned.pkl','rb') as f:
     model = pickle.load(f)
 
 #Changed to app folder
 app = flask.Flask(__name__, template_folder='app')
 
 #Check path
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/app/', methods=['GET', 'POST'])
 def main():
     if flask.request.method == 'GET':
         return(flask.render_template('index.html'))
