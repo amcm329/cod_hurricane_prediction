@@ -79,7 +79,7 @@ tasks:
   - type: start_application
     name: CECALT Application
   #  short_summary: This is the implementation of CECALT 
-    long_summary: This is the implementation of CECALT where, based on certain meteorological values, the predicted wind speed will (crucial for hurricane measurement) will be retrieved.
+    long_summary: This is the implementation of CECALT where, by inserting certain meteorological values, the predicted wind speed (essential for hurricane measurement) will be retrieved.
     subdomain: hurricane-prediction
     script: scripts/launch_app.py
     environment_variables:
