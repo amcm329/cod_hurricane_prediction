@@ -4,14 +4,14 @@ import pickle
 
 # Use pickle to load in the pre-trained model.
 
-with open(f'/src/prebuilt-models/best_model_tuned.pkl','rb') as f:
+with open(f'src/prebuilt-models/best_model_tuned.pkl','rb') as f:
     model = pickle.load(f)
 
 #Changed to app folder
 app = flask.Flask(__name__, template_folder='app')
 
 #Check path
-@app.route('/app/', methods=['GET', 'POST'])
+@app.route('app/', methods=['GET', 'POST'])
 def main():
     if flask.request.method == 'GET':
         return(flask.render_template('index.html'))
@@ -27,4 +27,5 @@ def main():
                                      original_input = {'Latitude':latitude,'Longitude':longitude,'Pressure':pressure},
                                      result=prediction)
 if __name__ == '__main__':
-    app.run()
+    #app.run()
+    app.run(host="127.0.0.1", port=int(os.environ["CDSW_READONLY_PORT"]))
