@@ -8,17 +8,55 @@ import cdsw
 import json
 from joblib import dump, load
 
+import pickle
+
 # args = {"feature" : "US,DCA,BOS,1,16"}
 #Homedir is /home/cdsw
 
-ct = load("/home/cdsw/src/prebuilt-models/ct.joblib")
-pipe = load("/home/cdsw/src/prebuilt-models/pipe.joblib")
+#ct = load("/home/cdsw/src/prebuilt-models/ct.joblib")
+#pipe = load("/home/cdsw/src/prebuilt-models/pipe.joblib")
 
 """
 ct = load("src/prebuilt-models/ct.joblib")
 pipe = load("src/prebuilt-models/pipe.joblib")
 """
 
+model = None 
+
+#This doesn't start with slash
+with open("/home/cdsw/src/prebuilt-models/best_model_tuned.pkl",'rb') as f:
+     model = pickle.load(f)
+
+
+args = {"feature" = "-50,50,100"}
+
+@cdsw.model_metrics
+def predict_cancelled(args):
+    inputs = args["feature"].split(",")
+
+    latitude = float(inputs[0])
+    longitude = float(inputs[1])
+    pressure = float(inputs[2])
+    
+    input_variables = [[latitude, longitude, pressure]]
+    
+    # Falta scaler ojo!
+    prediction = model.predict(input_variables)[0]
+
+    cdsw.track_metric("input_data", args)
+    cdsw.track_metric("prediction", int(prediction))
+    
+    response = {"prediction": int(prediction)}
+
+    return response
+
+
+
+
+
+
+
+"""
 @cdsw.model_metrics
 def predict_cancelled(args):
     inputs = args["feature"].split(",")
@@ -48,3 +86,4 @@ def predict_cancelled(args):
     response = {"prediction": int(prediction), "proba": str(proba)}
 
     return response
+    """
