@@ -95,7 +95,7 @@ tasks:
     entity_label: flight_model
     description: This model api endpoint predicts flight delays
     short_summary: Create the flight delay prediction model api endpoint
-    access_key_environment_variable: SHTM_ACCESS_KEY
+    #access_key_environment_variable: SHTM_ACCESS_KEY
     default_replication_policy:
       type: fixed
       num_replicas: 1
