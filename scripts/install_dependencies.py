@@ -4,8 +4,6 @@
 !pip install --no-cache-dir --progress-bar off -r requirements.txt
 
 import os
-import json
-import requests
 
 # Install cmlapi package
 try:
