@@ -31,6 +31,13 @@ tasks:
     cpu: 2
     memory: 4
 
+  #Train model is a run_job 
+  #Train model is a run_job 
+  #Train model is a run_job 
+  #Train model is a run_job 
+  #Train model is a run_job 
+  #Train model is a run_job 
+  
   ## JOB related AMP snippet
  # - type: create_job
  #   name: Sample Job
