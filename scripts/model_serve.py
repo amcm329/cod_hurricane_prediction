@@ -13,6 +13,8 @@ from joblib import dump, load
 
 #ct = load("/home/cdsw/src/prebuilt-models/ct.joblib")
 #pipe = load("/home/cdsw/src/prebuilt-models/pipe.joblib")
+
+"""
 ct = load("src/prebuilt-models/ct.joblib")
 pipe = load("src/prebuilt-models/pipe.joblib")
 
@@ -48,3 +50,8 @@ def predict_cancelled(args):
     response = {"prediction": int(prediction), "proba": str(proba)}
 
     return response
+"""
+
+#args = {"a":1,"b":2}
+def add(args):
+    return int(args["a"]) + int(args["b"])
