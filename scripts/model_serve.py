@@ -10,12 +10,11 @@ from joblib import dump, load
 
 # args = {"feature" : "US,DCA,BOS,1,16"}
 
-ct = load("../src/prebuilt-models/ct.joblib")
-pipe = load("../src/prebuilt-models/pipe.joblib")
+ct = load("~/src/prebuilt-models/ct.joblib")
+pipe = load("~/src/prebuilt-models/pipe.joblib")
 
 
 @cdsw.model_metrics
-#@models.cml_model(metrics=True)
 def predict_cancelled(args):
     inputs = args["feature"].split(",")
     inputs[3] = int(inputs[3])
