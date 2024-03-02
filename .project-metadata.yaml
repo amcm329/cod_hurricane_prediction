@@ -90,17 +90,45 @@ tasks:
   #---------------------------------------------------------
   #Note: all create, build and deploy must be together or removed completely.
   
-  
+  - type: create_model
+    name: Flight Delay Prediction Model Endpoint
+    entity_label: flight_model
+    description: This model api endpoint predicts flight delays
+    short_summary: Create the flight delay prediction model api endpoint
+    #access_key_environment_variable: SHTM_ACCESS_KEY
+    default_replication_policy:
+      type: fixed
+      num_replicas: 1
+
+  - type: build_model
+    name: Flight Delay Prediction Model API Endpoint
+    entity_label: flight_model
+    comment: Build flight prediction model
+    examples:
+      - request: { "feature": "US,DCA,BOS,1,16" }
+        response: 1
+    target_file_path: src/model_serve.py
+    target_function_name: predict_cancelled
+    environment_variables:
+      TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
+
+  - type: deploy_model
+    name: flight_prediction_model
+    entity_label: flight_model
+    cpu: 1
+    gpu: 0
+    environment_variables:
+      TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
     
   #---------------------------------------------------------
   ################### Application section ##################
   #---------------------------------------------------------
   
-  - type: start_application
-    name: CECALT Application
-    short_summary: This CECALT implementation by dinamically inserting the relevant inputs and getting a wind speed prediction. 
-    long_summary: This is CECALT implementation where, by inserting certain meteorological inputs, the predicted wind speed (essential for hurricane measurement) will be retrieved.
-    subdomain: hurricane-prediction
-    script: scripts/launch_app.py
-    environment_variables:
-      TASK_TYPE: START_APPLICATION
+  # - type: start_application
+  #  name: CECALT Application
+  #  short_summary: This CECALT implementation by dinamically inserting the relevant inputs and getting a wind speed prediction. 
+  #  long_summary: This is CECALT implementation where, by inserting certain meteorological inputs, the predicted wind speed (essential for hurricane measurement) will be retrieved.
+  #  subdomain: hurricane-prediction
+  #  script: scripts/launch_app.py
+  #  environment_variables:
+  #    TASK_TYPE: START_APPLICATION
