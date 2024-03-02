@@ -1,6 +1,10 @@
 import numpy as np
 import pandas as pd
-import cdsw
+
+#import cdsw
+import cml.metrics_v1 as metrics
+import cml.models_v1 as models
+
 import json
 from joblib import dump, load
 
@@ -10,7 +14,8 @@ ct = load("../src/prebuilt-models/ct.joblib")
 pipe = load("../src/prebuilt-models/pipe.joblib")
 
 
-@cdsw.model_metrics
+#@cdsw.model_metrics
+@models.cml_model(metrics=True)
 def predict_cancelled(args):
     inputs = args["feature"].split(",")
     inputs[3] = int(inputs[3])
