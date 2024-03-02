@@ -102,12 +102,12 @@ tasks:
 
   - type: build_model
     name: Flight Delay Prediction Model API Endpoint
-    entity_label: flight_model
+    entity_label: add #flight_model
     comment: Build flight prediction model
     examples:
-      - request: { "feature": "US,DCA,BOS,1,16" }
-        response: 1
-    target_file_path: src/model_serve.py
+      - request: {"a": 1,"b": 2}#{ "feature": "US,DCA,BOS,1,16" }
+        response: 3
+    target_file_path: src/add_numbers.py #src/model_serve.py
     target_function_name: predict_cancelled
     environment_variables:
       TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
