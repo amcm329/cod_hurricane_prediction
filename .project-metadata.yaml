@@ -79,9 +79,10 @@ tasks:
 #    entity_label: sample-model-entity-label
 
   #---------------------------------------------------------
-  ################ Build and Deploy sections ###############
+  ############ Create, Build and Deploy sections ###########
   #---------------------------------------------------------
-
+  #Note: all create, build and deploy must be together or removed completely.
+  
   - type: create_model
     name: Flight Delay Prediction Model Endpoint
     entity_label: flight_model
