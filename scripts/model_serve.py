@@ -28,7 +28,7 @@ with open("/home/cdsw/src/prebuilt-models/best_model_tuned.pkl",'rb') as f:
      model = pickle.load(f)
 
 
-args = {"feature" = "-50,50,100"}
+#args = {"feature": "-50,50,100"}
 
 @cdsw.model_metrics
 def predict_cancelled(args):
