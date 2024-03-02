@@ -9,9 +9,14 @@ import json
 from joblib import dump, load
 
 # args = {"feature" : "US,DCA,BOS,1,16"}
+#Homedir is /home/cdsw
 
-ct = load("/home/cdsw/src/prebuilt-models/ct.joblib")
-pipe = load("/home/cdsw/src/prebuilt-models/pipe.joblib")
+#ct = load("/home/cdsw/src/prebuilt-models/ct.joblib")
+#pipe = load("/home/cdsw/src/prebuilt-models/pipe.joblib")
+ct = load("src/prebuilt-models/ct.joblib")
+pipe = load("src/prebuilt-models/pipe.joblib")
+
+
 
 
 @cdsw.model_metrics
