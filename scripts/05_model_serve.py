@@ -35,7 +35,6 @@ ct = None
 pipe = None 
 model = None 
 
-"""
 #Reading both model and pipeline objects. Unless we are told otherwise, we take the 
 #path with the prebuilt elements. 
 
@@ -51,16 +50,10 @@ if os.getenv("USE_PREBUILT_MODEL") == "yes":
 else: 
     pipe = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/pipe.joblib")
 
-"""
-#ct = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ct.joblib")
-#pipe = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipe.joblib")
-
-
 
 #This doesn't start with slash
-with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/best_model_tuned.pkl",'rb') as f:
-     model = pickle.load(f)
-
+#with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/best_model_tuned.pkl",'rb') as f:
+#     model = pickle.load(f)
 
 #args = {"feature": "-50,50,100"}
 
