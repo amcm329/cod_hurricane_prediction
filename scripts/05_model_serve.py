@@ -1,13 +1,14 @@
+"""
+In this code the generation of an endpoint for the model prediction takes place.
+"""
+
 import numpy as np
 import pandas as pd
-
 import cdsw
 #import cml.metrics_v1 as metrics
 #import cml.models_v1 as models
-
 import json
 from joblib import dump, load
-
 import pickle
 
 # args = {"feature" : "US,DCA,BOS,1,16"}
