@@ -1,11 +1,7 @@
 # CECALT (Center of meteorologiCAL Technology) 
-This project is a Cloudera Machine Learning ([CML](https://www.cloudera.com/products/machine-learning.html)) **Applied Machine Learning Prototype** and has all the code and data needed to deploy an end-to-end machine learning project on a running CML instance. 
-
-
+This is an integral project whose objective is to increase the sensitivity of hurricane prediction systems. It contains all the code and data needed to deploy an end-to-end machine learning project on a running CML instance.
 
 ![CECALT_APP](static/CECALT.PNG)
-
-
 
 The primary goal of this repository is to build a gradient boosted (XGBoost) classification model to predict the likelihood of a flight being canceled based on years of historical records. To achieve that goal, this project demonstrates the end-to-end processing needed to take a large, raw dataset and transform it into a clean, stripped down dataset for model training and inference using Spark on CML. Additionally, this project deploys a hosted model and front-end application to allow users to interact with the trained model. 
 
@@ -17,25 +13,18 @@ The project is organized with the following folder structure:
 
 ```
 .
-├── code/           # Backend scripts, and notebooks needed to create project artifacts
-├── data/           # A post processed sample of the full dataset used for model training
-├── app/            # Assets needed to support the front end application
-├── images/         # A collection of images referenced in project docs
-├── models/         # Directory to hold trained models
-├── cdsw-build.sh   # Shell script used to build environment for experiments and models
+├── app/            # Sources needed to launch the application
+├── scripts/        # Scripts used for the creation and deploy of the end-to-end solution
+├── src/            # All the prebuilt models and datasets necessary for the project
+├── static/         # All images used in the project
 ├── README.md
+├── Documentation.md
 ├── LICENSE.txt
 └── requirements.txt
+
 ```
 
-By following the notebooks, scripts, and documentation in the `code` directory, you will understand how to perform similar tasks on CML, as well as how to use the platform's major features to your advantage. These features include:
-
-- CDP data access through data connection snippets
-- SQL-based and visual exploration of raw data
-- Data ingestion, cleaning, and processing with Spark
-- Streamlined model development
-- Point-and-click model deployment to a RESTful API endpoint
-- Application hosting for deploying frontend ML applications
+In case it is needed, a more accurate documentation i
 
 We will focus our attention on working within CML, using all it has to offer, while glossing over the details that are simply standard data science, and in particular, pay special attention to data ingestion and processing at scale with Spark.
 
