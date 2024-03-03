@@ -1,55 +1,34 @@
-import flask
-import pickle
+
+from flask import Flask, send_from_directory, request
+import logging
+from pandas.io.json import dumps as jsonify
 import os
-import joblib
+import random
+from IPython.display import Javascript, HTML
 
-# Use pickle to load in the pre-trained model.
 
-#This doesn't start with slash
-with open(f'/home/cdsw/src/prebuilt-models/ensemble_model3.pkl','rb') as f:
-    model = joblib.load(f)
+# This reduces the the output to the
+log = logging.getLogger("werkzeug")
+log.setLevel(logging.ERROR)
 
-with open(f'/home/cdsw/src/prebuilt-models/pipeline.pkl','rb') as f:
-    pipeline = joblib.load(f)
 
-#Changed to app folder
-#By default template_folder is "template"
-app = flask.Flask(__name__, template_folder='app')
+app = Flask(__name__, template="app")
 
-#Check path
-#This starts with slash
-@app.route('/', methods=['GET', 'POST'])
-def main():
-    if flask.request.method == 'GET':
-        return(flask.render_template('index.html'))
-    if flask.request.method == 'POST':
-        latitude = flask.request.form['latitude']
-        longitude = flask.request.form['longitude']
-        pressure = flask.request.form['pressure']
-        avg_pressure = flask.request.form['avgpressure']
-        air_temperature = flask.request.form['airtemperature']
-        dew_point = flask.request.form['dewpoint']
-        humidity = flask.request.form['humidity']
-        wind_direction = flask.request.form['winddirection']
-        avg_windspeed = flask.request.form['avgwindspeed']
-        wind_speed_ratio = flask.request.form['windspeedchange']
 
-        input_variables = [[latitude, longitude, pressure, air_temperature, dew_point,
-                            humidity, 0, 0, wind_direction, avg_pressure, avg_windspeed, wind_speed_ratio,
-                            ]]
+@app.route("/")
+def home():
+    return "<script> window.location.href = 'app/index.html'</script>"
 
-        transformed_variables = pipeline.transform(input_variables)
+@app.route("app/<path:path>")
+def send_file(path):
+    return send_from_directory("app", path)
 
-        prediction = model.predict(transformed_variables)[0]
 
-        return flask.render_template('index.html',
-                                     original_input = {'Latitude':latitude,'Longitude':longitude,'Pressure':pressure, 
-                                                      'Average Pressure':avg_pressure,'Air Temperature':air_temperature,
-                                                      'Dew Point':dew_point,'Relative Humidity':humidity,'Wind Direction':wind_direction,
-                                                      'Average Wind Speed':avg_windspeed,'Wind Speed Change Ratio':wind_speed_ratio},
-                                     result = prediction,
-                                     latitude_x = latitude,
-                                     longitude_y = longitude)
-if __name__ == '__main__':
-    #app.run()
+HTML(
+    "<a href='https://{}.{}'>Open Table View</a>".format(
+        os.environ["CDSW_ENGINE_ID"], os.environ["CDSW_DOMAIN"]
+    )
+)
+
+if __name__ == "__main__":
     app.run(host="127.0.0.1", port=int(os.environ["CDSW_READONLY_PORT"]))
