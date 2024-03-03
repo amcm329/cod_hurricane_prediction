@@ -107,7 +107,7 @@ tasks:
     examples:
       - request: { "feature": "-50,50,100" } # { "feature": "US,DCA,BOS,1,16" }
         response: 1
-    target_file_path: scripts/model_serve.py
+    target_file_path: scripts/04_model_serve.py
     target_function_name: predict_cancelled
     environment_variables:
       TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
@@ -129,6 +129,6 @@ tasks:
   #  short_summary: This CECALT implementation by dinamically inserting the relevant inputs and getting a wind speed prediction. 
   #  long_summary: This is CECALT implementation where, by inserting certain meteorological inputs, the predicted wind speed (essential for hurricane measurement) will be retrieved.
   #  subdomain: hurricane-prediction
-  #  script: scripts/launch_app.py
+  #  script: scripts/05_launch_app.py
   #  environment_variables:
   #    TASK_TYPE: START_APPLICATION
