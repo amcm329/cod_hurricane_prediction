@@ -3,8 +3,16 @@ The following document retrieves all the information from the NOAA site.
 The documents that will be extracted are only pdfs regarding hurricanes, more accurately, 
 their geographical and meteorological characteristics.
 """
+#Section for environment variables: 
+import os
 
-#How to execute it.
+full_path = os.getenv("OPERATING_SYSTEM_PATH")
+     
+if full_path is None: 
+   #Element doesn't exist.
+   os.environ["OPERATING_SYSTEM_PATH"] = "/home/cdsw/"
+
+#How to execute it (this will be done in another code).
 #scrapy runspider scraper.py
 
 #Error with Scrapy
