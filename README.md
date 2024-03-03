@@ -7,7 +7,7 @@ The primary goal of this repository is to build a XXXXXXXXXXXXXXXXx model to pre
 
 ![CECALT_OUTPUT](static/CECALT_2.PNG)
 
-The data sources used in this project come from [National Hurricane Center](https://www.nhc.noaa.gov/) and the [Meteostat Project](https://meteostat.net/en/), with the aid of important analysis and transformations. 
+The data sources used in this project come from the [National Hurricane Center](https://www.nhc.noaa.gov/) and the [Meteostat Project](https://meteostat.net/en/), with the aid of important analysis and transformations. 
 
 
 ## Project Structure
