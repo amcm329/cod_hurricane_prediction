@@ -95,7 +95,7 @@ tasks:
   #---------------------------------------------------------
   ############ Create, Build and Deploy sections ###########
   #---------------------------------------------------------
-  #Note: all create, build and deploy must be together or removed completely.
+  #Note: all create, build and deploy must be implemented or removed completely together.
   
     
   #---------------------------------------------------------
