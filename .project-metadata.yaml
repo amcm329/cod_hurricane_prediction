@@ -97,44 +97,15 @@ tasks:
   #---------------------------------------------------------
   #Note: all create, build and deploy must be together or removed completely.
   
-  - type: create_model
-    name: Flight Delay Prediction Model Endpoint
-    entity_label: flight_model
-    description: This model api endpoint predicts flight delays
-    short_summary: Create the flight delay prediction model api endpoint
-    #access_key_environment_variable: SHTM_ACCESS_KEY
-    default_replication_policy:
-      type: fixed
-      num_replicas: 1
-
-  - type: build_model
-    name: Flight Delay Prediction Model API Endpoint
-    entity_label: flight_model
-    comment: Build flight prediction model
-    examples:
-      - request: { "feature": "-50,50,100" } # { "feature": "US,DCA,BOS,1,16" }
-        response: 80
-    target_file_path: scripts/04_model_serve.py
-    target_function_name: predict_cancelled
-    environment_variables:
-      TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
-
-  - type: deploy_model
-    name: flight_prediction_model
-    entity_label: flight_model
-    cpu: 2
-    gpu: 0
-    environment_variables:
-      TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
     
   #---------------------------------------------------------
   ################### Application section ##################
   #---------------------------------------------------------
   
-  # - type: start_application
-  #  name: CECALT Application
-  #  short_summary: CECALT implementation were necessary inputs are dinamically inserted in order to get a wind speed prediction. 
-  #  subdomain: hurricane-prediction
-  #  script: scripts/05_launch_app.py
-  #  environment_variables:
-  #    TASK_TYPE: START_APPLICATION
+   - type: start_application
+     name: CECALT Application
+     short_summary: CECALT implementation were necessary inputs are dinamically inserted in order to get a wind speed prediction. 
+     subdomain: hurricane-prediction
+     script: scripts/06_launch_app.py
+     environment_variables:
+      TASK_TYPE: START_APPLICATION
