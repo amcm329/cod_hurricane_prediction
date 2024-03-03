@@ -1,25 +1,30 @@
-tensorflow==2.8.0
+#For all operations
+numpy==1.25.2
+scipy==1.11.4
+pandas==1.5.3
+joblib==1.3.2
+scikit-learn==1.2.2
+
+
+#tensorflow==2.8.0
 protobuf==3.20
 faiss-cpu==1.7.2
 pillow==9.0.0
-#flask==2.0.3
 flask_cors==3.0.10
 #Werkzeug==2.1.0
 
-pandas==1.3.5
-#joblib==1.1.0
-#scikit-learn==1.0.2
 xgboost==1.6.1
-numpy==1.20.0
 flask==2.2.1
 seaborn==0.11.2
 Werkzeug==2.2.2
-#Original_scikit-learn==1.2.2
-scikit-learn==1.0.2
-joblib==1.1.1
 
+#For script 02_download_data.py
+meteostat==1.6.7
 
-!pip install ppscore
-!pip install meteostat
-!pip install shap
-!pip install fancyimpute
+#For script 03_exploratory_data_analysis.ipynb
+ppscore==1.3.0
+shap==0.44.1
+fancyimpute==0.7.0
+
+#For script 05_model_serve.py
+
