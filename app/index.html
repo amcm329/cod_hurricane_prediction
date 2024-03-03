@@ -19,8 +19,48 @@ crossorigin=""></script>
 <!-- Styles -->
 <!-- Slidebar style -->
 <!-- Custom style -->
-<link rel="stylesheet" href="css/custom_style.css">
+<style>
+input[type="range"]:focus::-webkit-slider-thumb {   
+  border: 1px solid #053a5f;
+  outline: 3px solid #053a5f;
+  outline-offset: 0.125rem; 
+}
 
+/******** Firefox styles ********/
+/* slider track */
+input[type="range"]::-moz-range-track {
+   background-color: #053a5f;
+   border-radius: 0.5rem;
+   height: 0.5rem;
+}
+
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+   border: none; /*Removes extra border that FF applies*/
+   border-radius: 0; /*Removes default border-radius that FF applies*/
+
+   /*custom styles*/
+   background-color: #5cd5eb;
+   height: 2rem;
+   width: 1rem;
+}
+
+input[type="range"]:focus::-moz-range-thumb {
+  border: 1px solid #053a5f;
+  outline: 3px solid #053a5f;
+  outline-offset: 0.125rem; 
+}
+</style>
+
+<style>
+/* Style to center the image*/
+  .center_loc {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+}
+</style>  
+  
 </head>
 
   <body class="w3-content w3-border-left w3-border-right">
