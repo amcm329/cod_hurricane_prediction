@@ -3,7 +3,7 @@ This is an integral project whose objective is to increase the sensitivity of hu
 
 ![CECALT_APP](static/CECALT.PNG)
 
-Its promary goal is to build an ensemble learning model that combines the predictors of three base models
+Its promary goal is to build an ensemble learning model that combines the predictors of three base models:
 
 - Random Forest Regressor
 - XGBoost Regressor
@@ -17,7 +17,7 @@ The ensembling model uses a voting strategy to make its predictions, where each 
 
 This model is trained on a dataset of wind speed data and evaluated using MSE (Mean Squared Error), MAE (Mean Absolute Error), R2 score and RMSE (Root Mean Square Error) metrics.
 
-The dataset used in this project comes from the [National Hurricane Center](https://www.nhc.noaa.gov/) and the [Meteostat Project](https://meteostat.net/en/), with the aid of [analysis and transformations](scripts/README.md) analysis and transformations. 
+The dataset used in this project comes from the [National Hurricane Center](https://www.nhc.noaa.gov/) and the [Meteostat Project](https://meteostat.net/en/), with the aid of [analysis and transformations](scripts/exploratory_data_analysis.ipynb) analysis and transformations. 
 
 
 ## Project Structure
@@ -38,6 +38,7 @@ The project is organized with the following folder structure:
 ```
 The file  `Documentation.doc` contains a deeper walk-through of the project. 
 
+
 ## Deploying on Cloudera
 
 The ways of executing the project are the following ones: 
@@ -46,4 +47,5 @@ The ways of executing the project are the following ones:
 
 2. **Manual Setup** - In a CML workspace, click "New Project", add a Project Name, select "Git" as the Initial Setup option, copy in the [repo URL](https://github.com/amcm329/cod_hurricane_prediction), click "Create Project". Then, follow the steps listed [in this document](scripts/README.md).
 
+**Note:
 In general, the project contains mechanisms to guarantee a safe execution but if anything happens, it would be desirable to check both the documentation and the [technical configuration](scripts/README.md).
