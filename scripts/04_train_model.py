@@ -25,6 +25,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import SelectKBest
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
+from sklearn.feature_selection import mutual_info_regression
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 
 input = os.getenv("OPERATING_SYSTEM_PATH") + "src/data/semi_raw_meteorological_dataset.csv"
