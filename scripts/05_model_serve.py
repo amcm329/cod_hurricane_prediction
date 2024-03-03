@@ -22,15 +22,28 @@ if full_path is None:
    #Element doesn't exist.
    os.environ["OPERATING_SYSTEM_PATH"] = "/home/cdsw/"
 
+ct = None
+pipe = None 
+model = None 
+
 """
-ct = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ct.joblib")
-pipe = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipe.joblib")
+#Reading both model and pipeline objects. If something fails during the process, we take the 
+#path with the prebuilt elements. 
+
+try: 
+    ct = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/ct.joblib")
+except: 
+    ct = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ct.joblib")
+
+try:
+    pipe = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/pipe.joblib")
+except: 
+    pipe = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipe.joblib")
 """
 #ct = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ct.joblib")
 #pipe = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipe.joblib")
 
 
-model = None 
 
 #This doesn't start with slash
 with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/best_model_tuned.pkl",'rb') as f:
