@@ -93,22 +93,22 @@ tasks:
   ###### Feature Engineering and Traing Model section ######
   #---------------------------------------------------------
 
-  - type: create_job
-    name: Train hurricane prediction model
-    entity_label: train_model
-    script: scripts/04_train_model.py
-    arguments: None
-    short_summary: Job to train model.
-    environment:
-      TASK_TYPE: CREATE/RUN_JOB
+  #- type: create_job
+  #  name: Train hurricane prediction model
+  #  entity_label: train_model
+  #  script: scripts/04_train_model.py
+  #  arguments: None
+  #  short_summary: Job to train model.
+  #  environment:
+  #    TASK_TYPE: CREATE/RUN_JOB
 
-  - type: run_job
-    entity_label: train_model
-    cpu: 2
-    memory: 4
-    short_summary: Run model training job.
-    long_summary: >-
-      Running the job to train models.
+  #- type: run_job
+  #  entity_label: train_model
+  #  cpu: 2
+  #  memory: 4
+  #  short_summary: Run model training job.
+  #  long_summary: >-
+  #    Running the job to train models.
       
   #---------------------------------------------------------
   ############ Create, Build and Deploy sections ###########
