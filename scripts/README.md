@@ -1,14 +1,17 @@
 # Project Build Process
 
-If you want to walk through the workflow manually to build and understand how the project works, follow the steps below. There is a lot more detail and explanation/comments in each of the files/notebooks so its worth looking into those. We will focus our attention on working within CML, using all it has to offer, while glossing over the details that are simply standard data science. We trust that you are familiar with typical data science workflows and do not need detailed explanations of the code.
+In order to execute the module manually, follow these steps. It is important to mention that, inside each one of the codes, there are explanations and hints on how to properly execute them.
 
-### 0 - Bootstrap
+### 01 - Install dependencies
 
-There are a couple of steps needed at the start to configure the Project and Workspace settings so each step will run successfully. You **must** run the project bootstrap before running other steps.
+**Note**: this step *must* be executed in the beginning.
 
-Open the file `0_bootstrap.py` in a normal workbench Python3 session. You only need a 1 CPU / 2 GB instance. Then **Run > Run All Lines**
+Open the file `01_install_dependencies.py` in a normal workbench Python3 session. A 1 CPU / 2 GB instance is enough. Then **Run > Run All Lines**
 
-### 2 - Data Analysis
+### 02 - Download and clean data (Optional)
+
+
+### 03 - Exploratory Data Analysis (Optional)
 
 This is a Jupyter Notebook that does some basic data exploration and visualization. It is here to show how this would be part of the data science workflow.
 
