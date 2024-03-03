@@ -27,3 +27,6 @@ lightgbm==4.3.0
 flask==2.2.1
 seaborn==0.11.2
 Werkzeug==2.2.2
+
+#IMPORTANT: this library is installed only to avoid issues with reading notebooks in Cloudera.
+pyspark==3.5.1
