@@ -4,7 +4,7 @@
   
 name: CECALT - CEnter of MeteorologiCAL Technology
 description: CECALT is an integral solution which contributes to hurricane prediction sensitivity.
-author:  Aaron Castillo, Gilberto Subias, Javier Sanchez.
+author:  Aaron Castillo, Javier Sanchez, Gilberto Subias.
 specification_version: 1.0
 prototype_version: 1.0
 
@@ -37,7 +37,7 @@ tasks:
   - type: run_session
     name: Install Dependencies
     script: scripts/01_install_dependencies.py
-    short_summary: Install Requirements and Dependencies
+    short_summary: Install requirements and dependencies
     kernel: python3
     cpu: 2
     memory: 4
