@@ -1,7 +1,6 @@
-
+import os
 import flask
 import pickle
-import os
 
 # Use pickle to load in the pre-trained model.
 
