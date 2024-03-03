@@ -6,10 +6,10 @@ import joblib
 # Use pickle to load in the pre-trained model.
 
 #This doesn't start with slash
-with open(f'src/prebuilt-models/ensemble_model3.pkl','rb') as f:
+with open(f'/home/cdsw/src/prebuilt-models/ensemble_model3.pkl','rb') as f:
     model = joblib.load(f)
 
-with open(f'src/prebuilt-models/pipeline.pkl','rb') as f:
+with open(f'/home/cdsw/src/prebuilt-models/pipeline.pkl','rb') as f:
     pipeline = joblib.load(f)
 
 #Changed to app folder
