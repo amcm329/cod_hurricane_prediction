@@ -17,3 +17,9 @@ Werkzeug==2.2.2
 #Original_scikit-learn==1.2.2
 scikit-learn==1.0.2
 joblib==1.1.1
+
+
+!pip install ppscore
+!pip install meteostat
+!pip install shap
+!pip install fancyimpute
