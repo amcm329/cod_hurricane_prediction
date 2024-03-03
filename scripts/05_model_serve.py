@@ -38,13 +38,13 @@ pipeline = None
 #Reading both model and pipeline objects. Unless we are told otherwise, we take the 
 #path with the prebuilt elements. 
 
-if os.getenv("USE_PREBUILT_MODEL") == "yes": 
+if os.getenv("USE_PREBUILT_MODEL") == "yes" or os.getenv("USE_PREBUILT_MODEL") is None: 
     model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
 
 else: 
     model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/ensemble_model3.pkl")
 
-if os.getenv("USE_PREBUILT_MODEL") == "yes": 
+if os.getenv("USE_PREBUILT_MODEL") == "yes" or os.getenv("USE_PREBUILT_MODEL") is None: 
     pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl")
 
 else: 
