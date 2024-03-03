@@ -16,29 +16,41 @@ import pickle
 
 import os
 
+#Detecting the operating system full path:
 full_path = os.getenv("OPERATING_SYSTEM_PATH")
      
 if full_path is None: 
    #Element doesn't exist.
    os.environ["OPERATING_SYSTEM_PATH"] = "/home/cdsw/"
 
+#Detecting the prediction object model option.
+use_prebuilt_model = os.getenv("USE_PREBUILT_MODEL")
+
+if full_path is None: 
+   #Element doesn't exist.
+   os.environ["USE_PREBUILT_MODEL"] = "yes"
+
+
 ct = None
 pipe = None 
 model = None 
 
 """
-#Reading both model and pipeline objects. If something fails during the process, we take the 
+#Reading both model and pipeline objects. Unless we are told otherwise, we take the 
 #path with the prebuilt elements. 
 
-try: 
-    ct = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/ct.joblib")
-except: 
+if os.getenv("USE_PREBUILT_MODEL") == "yes": 
     ct = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ct.joblib")
 
-try:
-    pipe = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/pipe.joblib")
-except: 
+else: 
+    ct = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/ct.joblib")
+
+if os.getenv("USE_PREBUILT_MODEL") == "yes": 
     pipe = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipe.joblib")
+
+else: 
+    pipe = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/pipe.joblib")
+
 """
 #ct = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ct.joblib")
 #pipe = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipe.joblib")
