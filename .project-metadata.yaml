@@ -97,19 +97,39 @@ tasks:
 #    entity_label: sample-model-entity-label
 
   #---------------------------------------------------------
+  ###### Feature Engineering and Traing Model section ######
+  #---------------------------------------------------------
+
+  - type: create_job
+    name: Train Hurrican prediction Model
+    entity_label: train_model
+    script: scripts/04_train_model.py
+    arguments: None
+    short_summary: Job to train model.
+    environment:
+      TASK_TYPE: CREATE/RUN_JOB
+
+  - type: run_job
+    entity_label: train_model
+    cpu: 2
+    memory: 4
+    short_summary: Run model training job.
+    long_summary: >-
+      Running the job to train models.
+      
+  #---------------------------------------------------------
   ############ Create, Build and Deploy sections ###########
   #---------------------------------------------------------
   #Note: all create, build and deploy must be implemented or removed completely together.
   
-    
   #---------------------------------------------------------
   ################### Application section ##################
   #---------------------------------------------------------
   
-  - type: start_application
-    name: CECALT Application
-    short_summary: CECALT implementation for wind speed prediction. 
-    subdomain: hurricane-prediction
-    script: scripts/06_launch_app.py
-    environment_variables:
-     TASK_TYPE: START_APPLICATION
+  #- type: start_application
+  #  name: CECALT Application
+  #  short_summary: CECALT implementation for wind speed prediction. 
+  #  subdomain: hurricane-prediction
+  #  script: scripts/06_launch_app.py
+  #  environment_variables:
+  #   TASK_TYPE: START_APPLICATION
