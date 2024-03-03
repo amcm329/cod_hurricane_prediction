@@ -21,10 +21,12 @@ ct = load("src/prebuilt-models/ct.joblib")
 pipe = load("src/prebuilt-models/pipe.joblib")
 """
 
+full_path =  os.getenv("SPARK_CONNECTION_NAME")
+
 model = None 
 
 #This doesn't start with slash
-with open("/home/cdsw/src/prebuilt-models/best_model_tuned.pkl",'rb') as f:
+with open("src/prebuilt-models/best_model_tuned.pkl",'rb') as f:
      model = pickle.load(f)
 
 
