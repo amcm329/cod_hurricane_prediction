@@ -14,7 +14,7 @@ with open(f'/home/cdsw/src/prebuilt-models/pipeline.pkl','rb') as f:
 
 #Changed to app folder
 #By default template_folder is "template"
-app = flask.Flask(__name__, template_folder='/app')
+app = flask.Flask(__name__, template_folder='app')
 
 #Check path
 #This starts with slash
