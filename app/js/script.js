@@ -4,6 +4,8 @@ $(document).ready(function () {
 
 var url = window.location.origin.substr(0, window.location.origin.indexOf(":") + 1) + "//" + "modelservice." + window.location.origin.substr(window.location.origin.indexOf(".") + 1) + '/model'
 
+console.log(var url);
+
 function go_fetch() {
     var post_data = {
         request: {
