@@ -40,7 +40,7 @@ df = pd.read_csv(input)
 
 # Separating features and target.
 df=df.fillna(0)
-X = df.drop(['wind_speed','sequential_id','name','timestamp_utc','closest_stations','datetime'], axis=1)
+X = df.drop(['wind_speed','sequential_id','name','timestamp_utc','closest_stations'], axis=1)
 y= df['wind_speed']
 
 # Splitting data.
