@@ -27,40 +27,39 @@ class QuoteSpider(scrapy.Spider):
       #Here will be stored all the LINKS to the pfds.
       aux_urls = []
       initial_year = 2023#2002
-
+      count = 0
       #It's year + 1
       final_year = 2024
 
       #We are getting only the urls of etl files
       for x in range(initial_year,final_year):
 
-          #Adding only available regions (Atlantic, Pacific, Central):
-          for z in ["atl","epac","cpac"]:
+          if count < 3:   
+              #Adding only available regions (Atlantic, Pacific, Central):
+              for z in ["atl","epac","cpac"]:
 
-              #Looping throughout the mentioned years.
-              current_url = "https://www.nhc.noaa.gov/data/tcr/index.php?season={0}&basin={1}".format(x,z)
-              aux_urls.append(current_url)
-          
+                  #Looping throughout the mentioned years.
+                  current_url = "https://www.nhc.noaa.gov/data/tcr/index.php?season={0}&basin={1}".format(x,z)
+                  aux_urls.append(current_url)
+
+          else: 
+               break
+
+          count += 1 
+           
     start_urls = aux_urls
     #print(start_urls)
 
-    
+    """
+       Function that extracts from a html document the URLS contanining "PDF" references.
+    """
     def parse(self, response):
         HDR_SELECTOR = '.hdr'
-        #TEXT_SELECTOR = '.text::text'
-        #AHREF_SELECTOR = '.marker::text'
-        
-        #print("The response: ") 
-        #print(response.text)
-        #print(dir(response))
         base_url = "https://www.nhc.noaa.gov/data/tcr/"
         final_links = []
         
-        #Only pdfs 
+        #Pattern to recognize only pdfs 
         pattern = re.compile("^[A-Za-z0-9]+_[A-Za-z0-9]+.pdf$")
-        
-        #print(pattern.match("hola_mundo.pdf"))
-        #print(pattern.match("hola_mundo_cruel.pdf"))
         
         handler = open("url_links.txt","a")
     
