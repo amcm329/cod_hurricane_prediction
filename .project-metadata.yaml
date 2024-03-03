@@ -8,11 +8,18 @@ author:  Aaron Castillo, Gilberto Subias, Javier Sanchez.
 specification_version: 1.0
 prototype_version: 1.0
 
-#environment_variables:
-#  RANDOM_VARIABLE_NAME:
-#    default: "DEFAULT-VALUE"
-#    description: "A description providing user clarifying information about the variable."
-#    required: false
+#---------------------------------------------------------
+############## Environment variables section #############
+#---------------------------------------------------------
+
+environment_variables:
+  OPERATING_SYSTEM_PATH:
+    default: "/home/cdsw/"
+    description: "The full path needed to read all necessary files and variables"
+
+#---------------------------------------------------------
+##################### Runtime section ####################
+#---------------------------------------------------------
 
 runtimes:
   - editor: Workbench ## Other acceptable values are determined by the runtimes available in your CML environment
@@ -106,7 +113,7 @@ tasks:
     comment: Build flight prediction model
     examples:
       - request: { "feature": "-50,50,100" } # { "feature": "US,DCA,BOS,1,16" }
-        response: 1
+        response: 80
     target_file_path: scripts/04_model_serve.py
     target_function_name: predict_cancelled
     environment_variables:
@@ -115,7 +122,7 @@ tasks:
   - type: deploy_model
     name: flight_prediction_model
     entity_label: flight_model
-    cpu: 1
+    cpu: 2
     gpu: 0
     environment_variables:
       TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
@@ -126,8 +133,7 @@ tasks:
   
   # - type: start_application
   #  name: CECALT Application
-  #  short_summary: This CECALT implementation by dinamically inserting the relevant inputs and getting a wind speed prediction. 
-  #  long_summary: This is CECALT implementation where, by inserting certain meteorological inputs, the predicted wind speed (essential for hurricane measurement) will be retrieved.
+  #  short_summary: CECALT implementation were necessary inputs are dinamically inserted in order to get a wind speed prediction. 
   #  subdomain: hurricane-prediction
   #  script: scripts/05_launch_app.py
   #  environment_variables:
