@@ -17,6 +17,10 @@ environment_variables:
     default: "/home/cdsw/"
     description: "The full path needed to read all necessary files and variables"
 
+  USE_PREBUILT_MODEL: 
+    default: "yes"
+    description: "Specifying the usage of a prebuilt model"
+
 #---------------------------------------------------------
 ##################### Runtime section ####################
 #---------------------------------------------------------
