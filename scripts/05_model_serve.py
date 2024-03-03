@@ -81,11 +81,6 @@ def predict_wind_speed(args):
     cdsw.track_metric("input_data", args)
     cdsw.track_metric("prediction", float(prediction))
 
-    original_input = ,
-                                     result = prediction,
-                                     latitude_x = latitude,
-                                     longitude_y = longitude 
-    
     response = {
                  "original_input": {
                                     'Latitude': latitude,
@@ -98,14 +93,14 @@ def predict_wind_speed(args):
                                     'Wind Direction': wind_direction,
                                     'Average Wind Speed':avg_windspeed,
                                     'Wind Speed Change Ratio':wind_speed_ratio
-                                   }
+                                   },
          
          
                  "result": float(prediction),
                  "latitude_x": latitude,
                  "longitude_y": longitude
                }
-
+     
     return response
 
 
