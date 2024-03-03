@@ -1,28 +1,25 @@
 
-from flask import Flask, send_from_directory, request
-import logging
-from pandas.io.json import dumps as jsonify
 import os
 import random
+import logging
+from pandas.io.json import dumps as jsonify
 from IPython.display import Javascript, HTML
+from flask import Flask, send_from_directory, request
 
-
-# This reduces the the output to the
+# This enables an interactive debugger.
 log = logging.getLogger("werkzeug")
 log.setLevel(logging.ERROR)
 
-
 app = Flask(__name__, template_folder ="app")
-
 
 @app.route("/")
 def home():
     return "<script> window.location.href = 'app/index.html'</script>"
 
+
 @app.route("app/<path:path>")
 def send_file(path):
     return send_from_directory("app", path)
-
 
 HTML(
     "<a href='https://{}.{}'>Open Table View</a>".format(
