@@ -14,7 +14,8 @@ if full_path is None:
    #Element doesn't exist.
    os.environ["OPERATING_SYSTEM_PATH"] = "/home/cdsw/"
 
-import joblib   
+import joblib
+import numpy as np
 import pandas as pd
 import xgboost as xgb
 from sklearn.pipeline import Pipeline
