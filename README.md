@@ -3,7 +3,7 @@ This is an integral project whose objective is to increase the sensitivity of hu
 
 ![CECALT_APP](static/CECALT.PNG)
 
-The primary goal of this repository is to build a gradient boosted (XGBoost) classification model to predict the likelihood of a flight being canceled based on years of historical records. To achieve that goal, this project demonstrates the end-to-end processing needed to take a large, raw dataset and transform it into a clean, stripped down dataset for model training and inference using Spark on CML. Additionally, this project deploys a hosted model and front-end application to allow users to interact with the trained model. 
+The primary goal of this repository is to build a XXXXXXXXXXXXXXXXx model to predict the wind speed based on geographical and meteorological conditions, like in the following example: 
 
 The dataset used in this project comes from [Kaggle](https://www.kaggle.com/yuanyuwendymu/airline-delay-and-cancellation-data-2009-2018) and de API Meteostat 
 
