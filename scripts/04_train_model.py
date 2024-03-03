@@ -33,6 +33,10 @@ input = os.getenv("OPERATING_SYSTEM_PATH") + "src/data/semi_raw_meteorological_d
 pipeline_file = os.getenv("OPERATING_SYSTEM_PATH") + "src/models/pipeline.pkl"
 ensemble_model3_file = os.getenv("OPERATING_SYSTEM_PATH") + "src/models/ensemble_model3.pkl"
 
+
+"""
+ Function that executes both Feature Engineering and Traning activities.
+"""
 def execute_training():
     #---------------------------------------------------------
     ############### Feature Engineering section ##############
