@@ -3,7 +3,7 @@ This is an integral project whose objective is to increase the sensitivity of hu
 
 ![CECALT_APP](static/CECALT.PNG)
 
-Its promary goal is to build an ensemble learning model that combines the predictors of three base models:
+Its primary goal is to build an ensemble learning model that combines the predictors of three base models:
 
 - Random Forest Regressor
 - XGBoost Regressor
