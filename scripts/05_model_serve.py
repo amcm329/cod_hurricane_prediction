@@ -1,6 +1,8 @@
 """
 In this code the generation of an endpoint for the model prediction takes place.
 """
+#args = { "features": "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" } 
+
 import os
 
 #Detecting the operating system full path:
