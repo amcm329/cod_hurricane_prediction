@@ -7,9 +7,8 @@
 #Section for environment variables: 
 import os
 
-try:
-     #Element exists.
-     full_path = os.getenv("OPERATING_SYSTEM_PATH")
-except: 
-     #Element doesn't exist.
-     os.environ["OPERATING_SYSTEM_PATH"] = "/home/cdsw/"
+full_path = os.getenv("OPERATING_SYSTEM_PATH")
+     
+if full_path is None: 
+   #Element doesn't exist.
+   os.environ["OPERATING_SYSTEM_PATH"] = "/home/cdsw/"
