@@ -33,7 +33,7 @@ input = os.getenv("OPERATING_SYSTEM_PATH") + "src/data/semi_raw_meteorological_d
 pipeline_file = os.getenv("OPERATING_SYSTEM_PATH") + "src/models/pipeline.pkl"
 ensemble_model3_file = os.getenv("OPERATING_SYSTEM_PATH") + "src/models/ensemble_model3.pkl"
 
-def execute_process():
+def execute_training():
     #---------------------------------------------------------
     ############### Feature Engineering section ##############
     #---------------------------------------------------------
@@ -123,13 +123,9 @@ def execute_process():
 
 if __name__ == "__main__":
 
-    if os.environ["USE_PREBUILT_MODEL"] == "yes":
-        print(
-            "Copying pre-built model to models/"
-        )
-
-        os.makedirs("models", exist_ok=True)
-        shutil.copyfile("prebuilt-models/pipe.joblib", "models/pipe.joblib")
-        shutil.copyfile("prebuilt-models/ct.joblib", "models/ct.joblib")
+    #If the option is whether explicit or it doesn't exist, we use the prebuilt model.
+    if os.environ["USE_PREBUILT_MODEL"] == "yes" or os.environ["USE_PREBUILT_MODEL"] is None:
+        print("Using prebuilt model")
+         
     else:
-        main()
+        execute_training()
