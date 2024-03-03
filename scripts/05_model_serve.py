@@ -13,21 +13,26 @@ import pickle
 # args = {"feature" : "US,DCA,BOS,1,16"}
 #Homedir is /home/cdsw
 
-home_dir =  os.getenv("OPERATING_SYSTEM_PATH")
+import os
 
+full_path = os.getenv("OPERATING_SYSTEM_PATH")
+     
+if full_path is None: 
+   #Element doesn't exist.
+   os.environ["OPERATING_SYSTEM_PATH"] = "/home/cdsw/"
 
 """
-ct = load(home_dir + "src/prebuilt-models/ct.joblib")
-pipe = load(home_dir + "src/prebuilt-models/pipe.joblib")
+ct = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ct.joblib")
+pipe = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipe.joblib")
 """
-#ct = load(home_dir + "src/prebuilt-models/ct.joblib")
-#pipe = load(home_dir + "src/prebuilt-models/pipe.joblib")
+#ct = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ct.joblib")
+#pipe = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipe.joblib")
 
 
 model = None 
 
 #This doesn't start with slash
-with open(home_dir + "src/prebuilt-models/best_model_tuned.pkl",'rb') as f:
+with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/best_model_tuned.pkl",'rb') as f:
      model = pickle.load(f)
 
 
