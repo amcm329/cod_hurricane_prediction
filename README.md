@@ -3,11 +3,21 @@ This is an integral project whose objective is to increase the sensitivity of hu
 
 ![CECALT_APP](static/CECALT.PNG)
 
-The primary goal of this repository is to build a XXXXXXXXXXXXXXXXx model to predict the wind speed based on geographical and meteorological conditions, like in the following example: 
+Its promary goal is to build an ensemble learning model that combines the predictors of three base models
+
+- Random Forest Regressor
+- XGBoost Regressor
+- Neuronal Network Regressor
+
+To forecast the wind speed based on geographical and meteorological conditions, like in the following example: 
 
 ![CECALT_OUTPUT](static/CECALT_2.PNG)
 
-The data sources used in this project come from the [National Hurricane Center](https://www.nhc.noaa.gov/) and the [Meteostat Project](https://meteostat.net/en/), with the aid of important analysis and transformations. 
+The ensembling model uses a voting strategy to make its predictions, where each base model has an equal weight in the final prediction.
+
+This model is trained on a dataset of wind speed data and evaluated using MSE (Mean Squared Error), MAE (Mean Absolute Error), R2 score and RMSE (Root Mean Square Error) metrics.
+
+The dataset used in this project comes from the [National Hurricane Center](https://www.nhc.noaa.gov/) and the [Meteostat Project](https://meteostat.net/en/), with the aid of [analysis and transformations](scripts/README.md) analysis and transformations. 
 
 
 ## Project Structure
