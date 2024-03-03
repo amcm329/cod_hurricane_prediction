@@ -12,8 +12,10 @@ faiss-cpu==1.7.2
 pillow==9.0.0
 flask_cors==3.0.10
 
-#For script 02_download_data.py and 03_exploratory_data_analysis.ipynb
+#For scripts 02_download_data.py and 03_exploratory_data_analysis.ipynb
 meteostat==1.6.7
+scrapy==2.8.0
+wget==3.2
 
 #For script 03_exploratory_data_analysis.ipynb
 ppscore==1.3.0
