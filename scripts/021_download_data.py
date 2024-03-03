@@ -1,3 +1,10 @@
+"""
+The following document retrieves all the information from the NOAA site.
+The documents that will be extracted are only pdfs regarding hurricanes, more accurately, 
+their geographical and meteorological characteristics.
+"""
+
+#How to execute it.
 #scrapy runspider scraper.py
 
 #Error with Scrapy
@@ -9,47 +16,26 @@ import scrapy
 
 class QuoteSpider(scrapy.Spider):
       name = "spider-pdf"
+      #Here will be stored all the LINKS to the pfds.
       aux_urls = []
       initial_year = 2023#2002
 
       #It's year + 1
       final_year = 2024
-  
+
+      #We are getting only the urls of etl files
       for x in range(initial_year,final_year):
 
-          #Tolerated files:
+          #Adding only available regions (Atlantic, Pacific, Central):
           for z in ["atl","epac","cpac"]:
+
+              #Looping throughout the mentioned years.
               current_url = "https://www.nhc.noaa.gov/data/tcr/index.php?season={0}&basin={1}".format(x,z)
               aux_urls.append(current_url)
           
-
-    #https://www.nhc.noaa.gov/data/tcr/index.php?season=2023&basin=atl
-
-    
-    #start_urls = ["https://www.nhc.noaa.gov/data/tcr/index.php?season=2023&basin=atl"]
-    
     start_urls = aux_urls
-    
-    print(start_urls)
-    
-    """
-    def parse(self, response):
-        QUOTE_SELECTOR = '.quote'
-        TEXT_SELECTOR = '.text::text'
-        AUTHOR_SELECTOR = '.author::text'
-        
-        print("The response: ") 
-        print(response.css)
-        print(dir(response))
-        
-        
-        for quote in response.css(QUOTE_SELECTOR):
-            yield {
-                'text': quote.css(TEXT_SELECTOR).extract_first(),
-                'author': quote.css(AUTHOR_SELECTOR).extract_first(),
-            }
-            
-    """
+    #print(start_urls)
+
     
     def parse(self, response):
         HDR_SELECTOR = '.hdr'
