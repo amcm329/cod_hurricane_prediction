@@ -58,11 +58,6 @@ The module corresponding to the model deploy has been disabled for the complete 
 
 ![CECALT_OUTPUT](static/ERROR.PNG)
 
-But you can execute it manually and it works:
+But you can execute it individually and manually and it works:
 
 ![CECALT_OUTPUT](static/ERROR2.PNG)
-
-
-
-
-But if you want to execute the process individually, it works.
