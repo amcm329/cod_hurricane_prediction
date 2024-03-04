@@ -56,4 +56,4 @@ In general, the project contains mechanisms to guarantee a safe execution but if
 
 ----
 ### **IMPORTANT**
-DO NOT remove cdsw-build.sh as it will cause troubles in the deployment.
+DO NOT remove cdsw-build.sh as it will cause troubles in the model deployment.
