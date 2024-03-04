@@ -28,20 +28,15 @@ Open a **JupyterLab** session: Python3, 2 CPU, 4 GB and open the `03_exploratory
 At the top of the page click **Cells > Run All**.
 
 
-### 5 - Model Train
+### 04 - Model Train
 
 To run the model training process as a job, create a new job by going to the Project window and clicking _Jobs > New Job_ and entering the following settings:
 
 * **Name** : Train Model
-
 * **Script** : 04_train_model.py
-
 * **Arguments** : _Leave blank_
-
 * **Kernel** : Python 3
-
 * **Schedule** : Manual
-
 * **Engine Profile** : 2 vCPU / 4 GiB
 
   The rest can be left as is. Once the job has been created, click **Run** to start a manual run for that job.
@@ -49,22 +44,21 @@ To run the model training process as a job, create a new job by going to the Pro
   **Note:**: an environment flag **USE_PREBUILT_MODEL** is related to this process.
 
 
-### 5 - Model Serve
+### 05 - Model Serve
 
 To deploy the model that was trained in the previous step: from  to the Project page, click **Models > New Model** and create a new model with the following details:
 
-* **Name**: Flight Delay Prediction Model
-* **Description**: This model API endpoint predicts flight delays
-* **File**: 6_model_serve.py
-* **Function**: predict_cancelled
+* **Name**: Hurricane prediction model API endpoint
+* **Description**: This model api endpoint predicts wind speeds
+* **File**: 05_model_serve.py
+* **Function**: predict_wind_speed
 * **Kernel**: Python 3
-* **Engine Profile**: 1vCPU / 2 GiB Memory
+* **Engine Profile**: 2vCPU / 4 GiB Memory
 
-### 7 - Application
 
-The next step is to deploy the Flask application with the **[Applications](https://docs.cloudera.com/machine-learning/cloud/applications/topics/ml-applications.html)** feature in CML. For this project it is used to deploy a web based application that interacts with the underlying model created in the previous step.
+### 06 - Application
 
-Go to the **Applications** section and select "New Application" with the following:
+CECALT application concatenates all analytical power with a simple yet powerful graphical interface. In order to enable it you must go to the **Applications** section and select "New Application" with the following:
 
 * **Name**: Airline Delay Prediction App
 * **Subdomain**: delay-app
