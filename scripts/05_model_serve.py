@@ -17,7 +17,7 @@ if full_path is None:
 #Detecting the prediction object model option.
 use_prebuilt_model = os.getenv("USE_PREBUILT_MODEL")
 
-if full_path is None: 
+if use_prebuilt_model is None: 
    #Element doesn't exist.
    os.environ["USE_PREBUILT_MODEL"] = "yes"
 
@@ -34,23 +34,11 @@ pipeline = None
 #Reading both model and pipeline objects. Unless we are told otherwise, we take the 
 #path with the prebuilt elements. 
 
-if os.getenv("USE_PREBUILT_MODEL") == "yes" or os.getenv("USE_PREBUILT_MODEL") is None: 
-    #This doesn't start with slash
-    with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl",'rb') as f:
-         model = pickle.load(f)
-else: 
-    with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/ensemble_model3.pkl",'rb') as f:
-         model = pickle.load(f) 
-
-
-if os.getenv("USE_PREBUILT_MODEL") == "yes" or os.getenv("USE_PREBUILT_MODEL") is None: 
-    #This doesn't start with slash
-    with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl",'rb') as f:
-         pipeline = pickle.load(f)
-
-else: 
-    with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/pipeline.pkl",'rb') as f:
-         pipeline = pickle.load(f)
+with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl",'rb') as f:
+     model = pickle.load(f)
+         
+with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl",'rb') as f2:
+     pipeline = pickle.load(f2)
 
 
 @cdsw.model_metrics
