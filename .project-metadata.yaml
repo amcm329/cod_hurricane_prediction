@@ -96,32 +96,32 @@ tasks:
   #---------------------------------------------------------
   #Note: all create, build and deploy must be implemented or removed completely together.
 
- # - type: create_model
- #   name: Hurricane prediction model endpoint
- #   entity_label: hurricane_model
- #   description: This model api endpoint predicts wind speeds
- #   short_summary: Create the hurricane prediction model api endpoint
+  - type: create_model
+    name: Hurricane prediction model endpoint
+    entity_label: hurricane_model
+    description: This model api endpoint predicts wind speeds
+    short_summary: Create the hurricane prediction model api endpoint
    
- # - type: build_model
- #   name: Hurricane prediction model API endpoint
- #   entity_label: hurricane_model
- #   comment: Build hurricane prediction model
- #   examples:
- #     - request: { "features": "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" } 
- #       response: 425
- #   target_file_path: scripts/05_model_serve.py
- #   target_function_name: predict_wind_speed
- #   environment_variables:
- #     TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
+  - type: build_model
+    name: Hurricane prediction model API endpoint
+    entity_label: hurricane_model
+    comment: Build hurricane prediction model
+    examples:
+      - request: { "features": "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" } 
+        response: 425
+    target_file_path: scripts/05_model_serve.py
+    target_function_name: predict_wind_speed
+    environment_variables:
+      TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
 
- # - type: deploy_model
- #   name: hurricane_prediction_model
- #   entity_label: hurricane_model
- #   cpu: 2
- #   memory: 4
- #   gpu: 0
- #   environment_variables:
- #     TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
+  - type: deploy_model
+    name: hurricane_prediction_model
+    entity_label: hurricane_model
+    cpu: 2
+    memory: 4
+    gpu: 0
+    environment_variables:
+      TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
       
   #---------------------------------------------------------
   ################### Application section ##################
