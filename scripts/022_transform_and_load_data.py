@@ -71,7 +71,7 @@ def clean_and_transform_data():
     handler.close()
 
     for complete_url in lines: 
-        filename = wget.download(complete_url, out= os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs")
+        filename = wget.download(complete_url, out = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs")
 
    
     #Step 3: Extracting quantitative information from pdfs.  
@@ -219,7 +219,29 @@ def clean_and_transform_data():
   
     #Step 5: Appending meteorological information by using meteostat.
     print("Executing step 5...")
+
+    #Concatenating all csvs.
+    csv_path = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/csvs/
+    all_elements = os.listdir(csv_path)
+
+    list_of_dfs = []
+    for element in all_elements:
+        if ".csv" in element:
+           list_of_dfs.append(pd.read_csv(path + element))
+
+    df = pd.concat(list_of_dfs)
+    df.columns = ["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed","stage"]
+    df = df[["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed"]
+
+    #Getting meteorological stations available so we can retrieve the closest information possible given both latitude and
+    #longitude
+    df_stations = pd.read_csv("drive/MyDrive/HackathonCloudera/Model\'sDatasets/stations_locations.csv").set_index('id')
+    print(type(df_stations))
+    df_stations_dict = df_stations.to_dict("index")
+    print(df_stations_dict)
+
     
+  
     print("Process completed.")
 
 #---------------------------------------------------------
