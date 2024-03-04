@@ -39,10 +39,10 @@ def main():
                             humidity, 0, 0, wind_direction, avg_pressure, avg_windspeed, wind_speed_ratio,
                             ]]
 
-        #transformed_variables = pipeline.transform(input_variables)
-        #prediction = model.predict(transformed_variables)[0]
+        transformed_variables = pipeline.transform(input_variables)
+        prediction = model.predict(transformed_variables)[0]
 
-
+        #Poner aqui lo de la llamada.  
         
         return flask.render_template('index.html',
                                      original_input = {'Latitude':latitude,'Longitude':longitude,'Pressure':pressure, 
