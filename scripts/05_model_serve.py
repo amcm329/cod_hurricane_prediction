@@ -26,7 +26,6 @@ import json
 import pickle
 import numpy as np
 import pandas as pd
-from joblib import load
 
 model = None 
 pipeline = None 
@@ -35,16 +34,22 @@ pipeline = None
 #path with the prebuilt elements. 
 
 if os.getenv("USE_PREBUILT_MODEL") == "yes" or os.getenv("USE_PREBUILT_MODEL") is None: 
-    model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
-
+    #This doesn't start with slash
+    with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl",'rb') as f:
+         model = pickle.load(f)
 else: 
-    model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/ensemble_model3.pkl")
+    with open(os.getenv(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/ensemble_model3.pkl",'rb') as f:
+         model = pickle.load(f) 
+
 
 if os.getenv("USE_PREBUILT_MODEL") == "yes" or os.getenv("USE_PREBUILT_MODEL") is None: 
-    pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl")
+    #This doesn't start with slash
+    with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl",'rb') as f:
+         pipeline = pickle.load(f)
 
 else: 
-    pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/pipeline.pkl")
+    with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/pipeline.pkl",'rb') as f:
+         pipeline = pickle.load(f)
 
 
 @cdsw.model_metrics
