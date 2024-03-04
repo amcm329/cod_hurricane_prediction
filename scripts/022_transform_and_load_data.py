@@ -46,6 +46,9 @@ def convert2text(current_file):
     
     return contract_text[1:]
 
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
 
 """ 
   Auxiliary function created for step 4. 
@@ -53,12 +56,19 @@ def convert2text(current_file):
 def clean_1(x):
   return x.replace('/ ', '')
 
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
 
 """
   Auxiliary function created for step 4.
 """
 def clean_2(x):
   return x.replace('/', ' ')
+
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
 
 """
    Auxiliary function for step 5 that, based on the latitude and longitude, gathers the closests meteorological locations whitin a radius of  1.5 KM
@@ -100,6 +110,9 @@ def closest_stations(row):
 
     return row
 
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
 
 """
   Auxiliary row-wise function for step 5 that, given a point consisting in both latitude and longitude,
@@ -262,6 +275,9 @@ def meteorological_info(row):
 #-------------------------------------------------------------------
 #-------------------------------------------------------------------
 #-------------------------------------------------------------------
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
 
 """
   The following operation gathers all the steps mentioned previously.
@@ -272,6 +288,10 @@ def clean_and_transform_data():
     print("Executing step 1...")
     !scrapy runspider scraper.py
 
+    #-------------------------------------------------------------------
+    #-------------------------------------------------------------------
+    #-------------------------------------------------------------------
+
     #Step 2: getting all pds based on the mentioned links.
     print("Executing step 2...")
     handler = open(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/url_links.txt","a")
@@ -280,7 +300,10 @@ def clean_and_transform_data():
 
     for complete_url in lines: 
         filename = wget.download(complete_url, out = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs")
-
+    
+    #-------------------------------------------------------------------
+    #-------------------------------------------------------------------
+    #-------------------------------------------------------------------
    
     #Step 3: Extracting quantitative information from pdfs.  
     print("Executing step 3...")
@@ -294,6 +317,10 @@ def clean_and_transform_data():
            text_file.close()
 
     print('Last file: ', filename)
+
+    #-------------------------------------------------------------------
+    #-------------------------------------------------------------------
+    #-------------------------------------------------------------------
 
     #Step 4: Extracting relevant information from the txt.
     print("Executing step 4...")
@@ -424,6 +451,9 @@ def clean_and_transform_data():
 
     print('Number of discarded files: ',str(discarded_files), 'Percentage: ', str((discarded_files/753*100)))
 
+    #-------------------------------------------------------------------
+    #-------------------------------------------------------------------
+    #-------------------------------------------------------------------
   
     #Step 5: Appending meteorological information by using meteostat.
     print("Executing step 5...")
@@ -515,7 +545,7 @@ def clean_and_transform_data():
     #Renaming dataframe.
     df2.columns = ["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed","wind_direction","air_temperature","dew_point","relative_humidity","precipitation","condition_code","final_press","final_wspd"]
 
-    df2.to_csv(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/final_dataset_with_meteorological_data.csv",index=False)
+    df2.to_csv(os.getenv("OPERATING_SYSTEM_PATH") + "src/data/semi_raw_meteorological_dataset_2.csv",index=False)
 
     print("Process completed.")
 
@@ -531,5 +561,3 @@ if __name__ == "__main__":
          
     else:
         clean_and_transform_data()
-      
-
