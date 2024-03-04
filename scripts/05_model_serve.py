@@ -43,6 +43,10 @@ pipeline = None
 #with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl",'rb') as f2:
 #     pipeline = pickle.load(f2)
 
+#This doesn't start with slash
+model = joblib.load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
+pipeline = joblib.load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl")
+
 
 @cdsw.model_metrics
 def predict_wind_speed(args):
