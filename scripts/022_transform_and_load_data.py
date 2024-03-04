@@ -101,10 +101,167 @@ def closest_stations(row):
     return row
 
 
+"""
+  Auxiliary row-wise function for step 5 that, given a point consisting in both latitude and longitude,
+  as well as a timestamp, calls to Meteostat API to retrieve more climate information related to 
+  that point on that date.
+"""
+def meteorological_info(row):
+    final_temp = np.nan
+    final_dwpt = np.nan
+    final_rhum = np.nan
+    final_prcp = np.nan
+    final_wdir = np.nan
+    final_coco = np.nan
+
+    #These flags are added in case we want to check the origin
+    #of the value, specially meant for both pressure and wind
+    #speed whose values already existed in the PDF's
+    flag_pressure = 0
+    flag_wind_speed = 0
+
+    current_pressure = row[5]
+    current_wind_speed = row[6]
+
+    #These are values already existing in the original pdfs, but they don't
+    #exist for the gaps being filled.
+    #This is the purpose of such variables: if the values in the original
+    #pdf don't exist, then we fill them with the ones obtained from meteostat.
+    final_pres = np.nan
+    final_wspd = np.nan
+
+    #These are removed as they don't have any values.
+    #final_wpgt = np.nan
+    #final_snow = np.nan
+    #final_tsun = np.nan
+
+    closest_stations = list(row[7])
+
+    current_latitude = float(row[3])
+    current_longitude = float(row[4])
+
+    #Example: "2018-06-14 18:00:00"
+    #Argument is already timestamp from the filling gaps function.
+
+    current_timestamp = row[2]
+
+    if type(current_timestamp) == 'str':
+       current_timestamp = datetime.strptime(current_timestamp,"%Y-%m-%d %H:%M:%S") #datetime(2023, 8, 19, 0,0,0)
+
+    #There's a 3rd point (ALTITUDE) with elevation 0 because for zones with hurricanes, cyclones or tropical storms.
+    #ideally the value must be 0.
+
+    #This point belongs to the closest meteorological station.
+    current_meteorological_point = Point(current_latitude,  current_longitude)
+
+    #Begin and end are the same.
+    current_data = Hourly(current_meteorological_point, current_timestamp,current_timestamp)
+
+    temporary_data = ""
+
+    final_data = current_data.fetch()
+
+    #If there's a problem with catching the meteorological data is simply because the data
+    #doesn't exist for that Point, therefore we'll look in another point.
+    current_df_temp = final_data["temp"].values
+
+    if current_df_temp.size == 0:
+       for x in range(len(closest_stations)):
+
+           current_station = closest_stations[x]
+
+           if current_station != ' ' and current_station != '':
+
+               #Begin and end are the same.
+               current_data = Hourly(str(current_station), current_timestamp, current_timestamp)
+
+               final_data = current_data.fetch()
+
+               #If there's a problem with catching the meteorological data is simply because the data
+               #doesn't exist for that Point, therefore we'll look in another point.
+               current_df_temp = final_data["temp"].values
+
+               if current_df_temp.size > 0:
+                  final_temp = final_data["temp"].values[0]
+                  final_dwpt = final_data["dwpt"].values[0]
+                  final_rhum = final_data["rhum"].values[0]
+                  final_prcp = final_data["prcp"].values[0]
+                  final_coco = final_data["coco"].values[0]
+                  final_wdir = final_data["wdir"].values[0]
+
+                  #These are values already existing in the original pdfs, but they don't
+                  #exist for the gaps being filled.
+                  #This is the purpose of such variables: if the values in the original
+                  #pdf don't exist, then we fill them with the ones obtained brom meteostat.
+                  final_pres = final_data["pres"].values[0]
+                  final_wspd = final_data["wspd"].values[0]
+
+                  #These are removed as they don't have any values.
+                  #final_wpgt = final_data["wpgt"].values[0]
+                  #final_snow = final_data["snow"].values[0]
+                  #final_tsun = final_data["tsun"].values[0]
+
+                  break
+
+    else:
+        final_temp = final_data["temp"].values[0]
+        final_dwpt = final_data["dwpt"].values[0]
+        final_rhum = final_data["rhum"].values[0]
+        final_prcp = final_data["prcp"].values[0]
+        final_coco = final_data["coco"].values[0]
+        final_wdir = final_data["wdir"].values[0]
+
+        #These are values already existing in the original pdfs, but they don't
+        #exist for the gaps being filled.
+        #This is the purpose of such variables: if the values in the original
+        #pdf don't exist, then we fill them with the ones obtained brom meteostat.
+        final_pres = final_data["pres"].values[0]
+        final_wspd = final_data["wspd"].values[0]
+
+        #These are removed as they don't have any values.
+        #final_wpgt = final_data["wpgt"].values[0]
+        #final_snow = final_data["snow"].values[0]
+        #final_tsun = final_data["tsun"].values[0]
 
 
+    #Appending all the elements.
+    row["temp"] = final_temp
+    row["dwpt"] = final_dwpt
+    row["rhum"] = final_rhum
+    row["prcp"] = final_prcp
+    row["coco"] = final_coco
+    row["wdir"] = final_wdir
 
+    #Pressure = row[5]
+    if math.isnan(current_pressure) == True:
+       if math.isnan(final_pres) == False:
+          flag_pressure = 1
+          #row[5] = final_pres
 
+    #Wind = row[6]
+    if math.isnan(current_wind_speed) == True:
+       if math.isnan(final_wspd) == False:
+          flag_wind_speed = 1
+          #row[6] = final_wspd
+
+    row["final_press"] = final_pres
+    row["final_wspd"] = final_wspd
+    #row["flag_pressure"] = flag_pressure
+    #row["flag_wind_speed"] = flag_wind_speed
+
+    #These are removed as they don't have any values.
+    #row["wpgt"] = final_wpgt
+    #row["snow"] = final_snow
+    #row["tsun"] = final_tsun
+
+    return row
+
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
 
 """
   The following operation gathers all the steps mentioned previously.
@@ -286,14 +443,80 @@ def clean_and_transform_data():
 
     #Getting meteorological stations available so we can retrieve the closest information possible given both latitude and
     #longitude
-    df_stations = pd.read_csv("drive/MyDrive/HackathonCloudera/Model\'sDatasets/stations_locations.csv").set_index('id')
+    df_stations = pd.read_csv(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/stations_locations.csv").set_index('id')
     #print(type(df_stations))
     df_stations_dict = df_stations.to_dict("index")
     #print(df_stations_dict)
 
-    
-    
-  
+    #IMPORTANT: since too many calls to the API will cause a DDoS, we are processing al the rows in batch.
+
+    final_dfs = []
+
+    #These variables are created to calculate the number of chunks.
+    remaining_data_elements = df.count()["sequential_id"]
+    number_of_batches = 10
+    how_many_processes = number_of_batches
+    how_many_elements =  remaining_data_elements
+    lower_limit = 0
+    upper_limit = 0
+    my_counter = 0
+    i = 0
+
+    a = time.time()
+    print("-------------------------------------------------")
+    print("-----Starting transformation....")
+
+    #Creating as much processes as chunks needed.
+    for i in range(1,number_of_batches):
+
+               how_many_elements = int(math.ceil(remaining_data_elements/how_many_processes))
+               upper_limit += how_many_elements
+
+               #Getting a subset to be used for each Process
+               current_df = df.loc[lower_limit:upper_limit,:]
+               current_df = current_df.apply(closest_stations, axis = 1)
+               current_df = current_df.apply(meteorological_info, axis = 1)
+
+               #print(current_df)
+               print("               ........................................................", i)
+
+               final_dfs.append(current_df)
+
+               b = time.time()
+               result1 = (b-a)/60
+               print("Elapsed time first stage (minutes): ",result1)
+
+               how_many_processes -= 1
+               lower_limit = upper_limit + 1
+               remaining_data_elements -= how_many_elements
+               my_counter += 1
+
+    print("Last elements to be processed")
+
+    #This part corresponds to the last Process and more specifically, to the remaining data to be assigned.
+    i+=1
+    my_counter += 1
+
+    upper_limit += remaining_data_elements
+    current_df = df.loc[lower_limit:upper_limit,:]
+    current_df = current_df.apply(closest_stations, axis = 1)
+    current_df = current_df.apply(meteorological_info, axis = 1)
+    final_dfs.append(current_df)
+
+    c = time.time()
+    df2 = pd.concat(final_dfs)
+    print("-------------------------------------------------")
+    result3 = (c-a)/60
+    print("Elapsed time ALL (minutes): ",result3)  
+
+    #Subsetting dataframe.
+    df2 = df2[["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed","wdir", "temp", "dwpt", "rhum", "prcp", "coco","final_press","final_wspd"]]
+
+    #Renaming dataframe.
+    df2.columns = ["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed","wind_direction","air_temperature","dew_point","relative_humidity","precipitation","condition_code","final_press","final_wspd"]
+
+    df2.to_csv(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/final_dataset_with_meteorological_data.csv",index=False)
+
     print("Process completed.")
 
 #---------------------------------------------------------
