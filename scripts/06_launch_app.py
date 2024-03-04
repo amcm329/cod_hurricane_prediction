@@ -57,7 +57,7 @@ def main():
            #r = requests.post('http://modelservice.cdsw.44.232.253.206.nip.io/model', data='{"accessKey":"m03jfhnxm1ea6hhdoia94qa3p0kceuse","request":{"feature":"0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0"}}', headers={'Content-Type': 'application/json'})  
            #prediction = r["result"]
         
-         except:     
+        except:     
            prediction = model.predict(transformed_variables)[0]
   
         return flask.render_template('index.html',
