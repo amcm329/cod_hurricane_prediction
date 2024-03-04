@@ -26,8 +26,9 @@ import numpy as np
 import pandas as pd
 
 import PyPDF2 #3.0.1
-import pdfplumber
+import pdfplumber #0.10.4
 
+10.2.0
 
 
 """
@@ -77,7 +78,9 @@ def clean_and_transform_data():
     
     print("Process completed.")
 
-
+#---------------------------------------------------------
+###################### Main section ######################
+#---------------------------------------------------------
   
 if __name__ == "__main__":
 
