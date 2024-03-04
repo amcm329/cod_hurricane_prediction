@@ -15,6 +15,7 @@ Open the file `01_install_dependencies.py` in a normal workbench Python3 session
 Open the file `022_transform_and_load_data.py` in a normal workbench Python3 session. A 2 CPU / 4 GB instance is desirable. Then **Run > Run All Lines**
 
 **Note:** this step relies on the API Meteostat and because of it, a lag might be present.
+
 **Note:**: an environment flag **ETL_OPERATIONS** is related to this process.
 
 
