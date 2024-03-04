@@ -158,9 +158,12 @@ def meteorological_info(row):
 
     current_timestamp = row[2]
 
-    if type(current_timestamp) == 'str':
+    try:
        current_timestamp = datetime.strptime(current_timestamp,"%Y-%m-%d %H:%M:%S") #datetime(2023, 8, 19, 0,0,0)
 
+    except:
+       print(current_timestamp)
+ 
     #There's a 3rd point (ALTITUDE) with elevation 0 because for zones with hurricanes, cyclones or tropical storms.
     #ideally the value must be 0.
 
@@ -468,12 +471,13 @@ def clean_and_transform_data():
 
     list_of_dfs = []
     for element in all_elements:
-        if ".csv" in element:
-           list_of_dfs.append(pd.read_csv(path + element))
+        if ".csv" in element and "foo" not in element:
+            print(csv_path + element)
+            list_of_dfs.append(pd.read_csv(csv_path + element))
 
     df = pd.concat(list_of_dfs)
     df.columns = ["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed","stage"]
-    df = df[["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed"]
+    df = df[["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed"]]
 
     #Getting meteorological stations available so we can retrieve the closest information possible given both latitude and
     #longitude
@@ -507,7 +511,7 @@ def clean_and_transform_data():
                upper_limit += how_many_elements
 
                #Getting a subset to be used for each Process
-               current_df = df.loc[lower_limit:upper_limit,:]
+               current_df = df.iloc[lower_limit:upper_limit,:]
                current_df = current_df.apply(closest_stations, axis = 1)
                current_df = current_df.apply(meteorological_info, axis = 1)
 
@@ -532,7 +536,7 @@ def clean_and_transform_data():
     my_counter += 1
 
     upper_limit += remaining_data_elements
-    current_df = df.loc[lower_limit:upper_limit,:]
+    current_df = df.iloc[lower_limit:upper_limit,:]
     current_df = current_df.apply(closest_stations, axis = 1)
     current_df = current_df.apply(meteorological_info, axis = 1)
     final_dfs.append(current_df)
