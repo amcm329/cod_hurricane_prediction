@@ -321,7 +321,7 @@ def clean_and_transform_data():
    
     #Step 3: Extracting quantitative information from pdfs.  
     print("Executing step 3...")
-    print(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs/)
+    print(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs/")
     for filename in os.listdir(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs/"):
         if "pdf" in filename: 
            fullpath = os.path.join(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs/", filename)
