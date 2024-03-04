@@ -51,3 +51,11 @@ The ways of executing the project are the following ones:
 ----
 ### **Note**
 In general, the project contains mechanisms to guarantee a safe execution but if anything happens, it would be desirable to check both the documentation and the [technical configuration](scripts/README.md).
+
+----
+### **IMPORTANT**
+The module corresponding to the model deploy has been disabled for the complete execution as it alwayws throws the following error despite the library being installed already: 
+
+![CECALT_OUTPUT](static/ERROR.PNG)
+
+But if you want to execute the process individually, it works.
