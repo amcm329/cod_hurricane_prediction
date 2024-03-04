@@ -14,9 +14,9 @@ Open the file `scripts/01_install_dependencies.py` in a normal workbench Python3
 
 Open the file `scripts/022_transform_and_load_data.py` in a normal workbench Python3 session. A 2 CPU / 4 GB instance is desirable. Then **Run > Run All Lines**
 
-**Note:** this step relies on the API Meteostat and because of it, a lag might be present.
+**Note**: this step relies on the API Meteostat and because of it, a lag might be present.
 
-**Note:**: an environment flag **ETL_OPERATIONS** is related to this process.
+**Note**: an environment flag **ETL_OPERATIONS** is related to this process.
 
 
 ### 03 - Exploratory Data Analysis (Optional)
@@ -41,7 +41,7 @@ To run the model training process as a job, create a new job by going to the Pro
 
   The rest can be left as is. Once the job has been created, click **Run** to start a manual run for that job.
 
-  **Note:**: an environment flag **USE_PREBUILT_MODEL** is related to this process.
+  **Note**: an environment flag **USE_PREBUILT_MODEL** is related to this process.
 
 
 ### 05 - Model Serve
@@ -68,5 +68,5 @@ CECALT application concatenates all analytical power with a simple yet powerful 
 
 Then click "Create Application". After the Application deploys, click on the blue-arrow next to the name to launch the application in a new window.
 
-**Note:**: it might require some credentials to log in, these are the same ones provided for the Workbench.
+**Note**: it might require some credentials to log in, these are the same ones provided for the Workbench.
 
