@@ -300,7 +300,8 @@ def clean_and_transform_data():
 
     for complete_url in lines: 
         try:
-           filename = wget.download(complete_url, out = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs")
+           print(complete_url)
+           filename = wget.download(complete_url, out = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs/")
         except:
            pass
     #-------------------------------------------------------------------
@@ -313,6 +314,7 @@ def clean_and_transform_data():
         if "pdf" in filename: 
            fullpath = os.path.join(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs/", filename)
            txt_file_name = fullpath.replace("pdf","txt")
+           print(text_file)
            text_file = open(txt_file_name, 'wt')
            text = convert2text(fullpath)
            text_file.write(text)
