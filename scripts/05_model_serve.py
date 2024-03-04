@@ -1,26 +1,4 @@
-"""
-In this code the generation of an endpoint for the model prediction takes place.
-"""
-
-#Example:
-#args = { "feature": "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" } 
-
 import os
-
-#Detecting the operating system full path:
-full_path = os.getenv("OPERATING_SYSTEM_PATH")
-     
-if full_path is None: 
-   #Element doesn't exist.
-   os.environ["OPERATING_SYSTEM_PATH"] = "/home/cdsw/"
-
-#Detecting the prediction object model option.
-use_prebuilt_model = os.getenv("USE_PREBUILT_MODEL")
-
-if use_prebuilt_model is None: 
-   #Element doesn't exist.
-   os.environ["USE_PREBUILT_MODEL"] = "yes"
-
 from joblib import dump, load
 import cdsw
 import json
@@ -28,9 +6,10 @@ import pickle
 import numpy as np
 import pandas as pd
 
+#In this code the generation of an endpoint for the model prediction takes place.
 
-model = None 
-pipeline = None 
+#Example:
+#args = { "feature": "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" } 
 
 #Reading both model and pipeline objects. Unless we are told otherwise, we take the 
 #path with the prebuilt elements. 
@@ -45,12 +24,13 @@ pipeline = None
 #model = joblib.load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
 #pipeline = joblib.load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl")
 
-model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
-pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl")
 
 
 @cdsw.model_metrics
 def predict_wind_speed(args):
+    model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
+    pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl") 
+
     inputs = args["feature"].split(",")
 
     latitude = float(inputs[0])
