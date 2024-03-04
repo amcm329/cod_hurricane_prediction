@@ -22,7 +22,7 @@ environment_variables:
     description: "Specifying the usage of a prebuilt model"
 
   ETL_OPERATIONS: 
-    default: "yes"
+    default: "no"
     description: "Specifying the usage of the ETLs operations"
     
 #---------------------------------------------------------
