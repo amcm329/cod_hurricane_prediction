@@ -25,7 +25,7 @@ def clean_and_transform_data():
   
     !scrapy runspider scraper.py
 
-    handler = open(os.getenv("OPERATING_SYSTEM_PATH") + "src/data/preprocessing/url_links.txt","a")
+    handler = open(os.getenv("OPERATING_SYSTEM_PATH") + "src/data/auxiliary/url_links.txt","a")
     lines = handler.read_lines()
     handler.close()
 
