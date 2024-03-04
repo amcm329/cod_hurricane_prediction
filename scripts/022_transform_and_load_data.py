@@ -29,7 +29,13 @@ import pandas as pd
 from datetime import datetime, timedelta
 from meteostat import Point, Daily, Hourly, Stations
 
-global df_stations_dict
+#Getting meteorological stations available so we can retrieve the closest information possible given both latitude and
+#longitude
+print(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/stations_locations.csv")
+df_stations = pd.read_csv(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/stations_locations.csv").set_index('id')
+#print(type(df_stations))
+df_stations_dict = df_stations.to_dict("index")
+#print(df_stations_dict)
 
 """
   Auxiliary function for Step 2.
@@ -298,6 +304,7 @@ def clean_and_transform_data():
 
     #Step 2: getting all pds based on the mentioned links.
     print("Executing step 2...")
+    print(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/url_links.txt")
     handler = open(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/url_links.txt","r")
     lines = handler.readlines()
     handler.close()
@@ -314,6 +321,7 @@ def clean_and_transform_data():
    
     #Step 3: Extracting quantitative information from pdfs.  
     print("Executing step 3...")
+    print(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs/)
     for filename in os.listdir(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs/"):
         if "pdf" in filename: 
            fullpath = os.path.join(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs/", filename)
@@ -332,7 +340,7 @@ def clean_and_transform_data():
 
     #Step 4: Extracting relevant information from the txt.
     print("Executing step 4...")
-
+    print(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/csvs/")
     #Variable created to gather monthly information.
     months = ['January','February','March','April','May','June','July','August','September','October','November','December']
     input_path = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/txts/"
@@ -465,7 +473,7 @@ def clean_and_transform_data():
   
     #Step 5: Appending meteorological information by using meteostat.
     print("Executing step 5...")
-
+    print(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/csvs/")
     #Concatenating all csvs.
     csv_path = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/csvs/"
     all_elements = os.listdir(csv_path)
@@ -479,13 +487,6 @@ def clean_and_transform_data():
     df = pd.concat(list_of_dfs)
     df.columns = ["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed","stage"]
     df = df[["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed"]]
-
-    #Getting meteorological stations available so we can retrieve the closest information possible given both latitude and
-    #longitude
-    df_stations = pd.read_csv(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/stations_locations.csv").set_index('id')
-    #print(type(df_stations))
-    df_stations_dict = df_stations.to_dict("index")
-    #print(df_stations_dict)
 
     #IMPORTANT: since too many calls to the API will cause a DDoS, we are processing al the rows in batch.
 
