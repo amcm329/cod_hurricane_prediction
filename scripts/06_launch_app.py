@@ -4,7 +4,6 @@ import pickle
 import requests
 from joblib import load
 
-import os
 
 full_path = os.getenv("OPERATING_SYSTEM_PATH")
      
