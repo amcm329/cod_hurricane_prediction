@@ -47,12 +47,63 @@ def convert2text(current_file):
     return contract_text[1:]
 
 
-# Starting time---- 6:40 pm
+""" 
+  Auxiliary function created for step 4. 
+"""
 def clean_1(x):
   return x.replace('/ ', '')
 
+
+"""
+  Auxiliary function created for step 4.
+"""
 def clean_2(x):
   return x.replace('/', ' ')
+
+"""
+   Auxiliary function for step 5 that, based on the latitude and longitude, gathers the closests meteorological locations whitin a radius of  1.5 KM
+T  his is used to obtain the most accurate information for a given position
+"""
+def closest_stations(row):
+
+    current_latitude = row["latitude"]
+    current_longitude = row["longitude"]
+
+    local_stations_dict = df_stations_dict.copy()
+
+    list_closest_stations_id = []
+    list_closest_stations_distance = []
+    list_closest_stations_elevation = []
+    stations_keys = list(df_stations_dict.keys())
+
+    for current_station in local_stations_dict.keys():
+        current_local_station_latitude = local_stations_dict[current_station]["latitude"]
+        current_local_station_longitude =  local_stations_dict[current_station]["longitude"]
+
+        #Calculating the euclidean distance from the current point to all the stations.
+        local_stations_dict[current_station]["euclidean_distance"] = math.sqrt((current_latitude - current_local_station_latitude)**2 + (current_longitude - current_local_station_longitude)**2)
+
+    #Sorting the closests stations in ascending order.
+    local_stations_sorted = sorted(local_stations_dict.items(), key=lambda x: x[1]['euclidean_distance'], reverse=False)
+
+    for final_local_station in local_stations_sorted:
+        current_dictionary = final_local_station[1]
+        current_distance = current_dictionary["euclidean_distance"]
+
+        #This is the threshold, which means that the stations within a radius of 1.5 KM.
+        if current_distance <= 1.5:
+           list_closest_stations_id.append(final_local_station[0])
+           list_closest_stations_distance.append(current_distance)
+           list_closest_stations_elevation.append(current_dictionary["elevation"])
+
+    row["closest_stations"] = list_closest_stations_id
+
+    return row
+
+
+
+
+
 
 
 """
@@ -236,10 +287,11 @@ def clean_and_transform_data():
     #Getting meteorological stations available so we can retrieve the closest information possible given both latitude and
     #longitude
     df_stations = pd.read_csv("drive/MyDrive/HackathonCloudera/Model\'sDatasets/stations_locations.csv").set_index('id')
-    print(type(df_stations))
+    #print(type(df_stations))
     df_stations_dict = df_stations.to_dict("index")
-    print(df_stations_dict)
+    #print(df_stations_dict)
 
+    
     
   
     print("Process completed.")
