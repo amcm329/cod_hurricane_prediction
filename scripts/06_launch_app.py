@@ -68,6 +68,7 @@ def main():
                                      result = prediction,
                                      latitude_x = latitude,
                                      longitude_y = longitude)
-         
+
+
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=int(os.environ["CDSW_READONLY_PORT"]))
