@@ -294,12 +294,13 @@ def clean_and_transform_data():
 
     #Step 2: getting all pds based on the mentioned links.
     print("Executing step 2...")
-    handler = open(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/url_links.txt","a")
+    handler = open(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/url_links.txt","r")
     lines = handler.read_lines()
     handler.close()
 
     for complete_url in lines: 
-        filename = wget.download(complete_url, out = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs")
+        if complete_url != "" or complete_url != " ": 
+           filename = wget.download(complete_url, out = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs")
     
     #-------------------------------------------------------------------
     #-------------------------------------------------------------------
