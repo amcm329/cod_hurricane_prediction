@@ -27,17 +27,21 @@ import pickle
 import numpy as np
 import pandas as pd
 
+!pip install joblib
+
+import joblib
+
 model = None 
 pipeline = None 
 
 #Reading both model and pipeline objects. Unless we are told otherwise, we take the 
 #path with the prebuilt elements. 
 
-with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl",'rb') as f:
-     model = pickle.load(f)
+#with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl",'rb') as f:
+#     model = pickle.load(f)
          
-with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl",'rb') as f2:
-     pipeline = pickle.load(f2)
+#with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl",'rb') as f2:
+#     pipeline = pickle.load(f2)
 
 
 @cdsw.model_metrics
