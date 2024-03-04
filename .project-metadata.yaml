@@ -21,6 +21,10 @@ environment_variables:
     default: "yes"
     description: "Specifying the usage of a prebuilt model"
 
+  ETL_OPERATIONS: 
+    default: "yes"
+    description: "Specifying the usage of the ETLs operations"
+    
 #---------------------------------------------------------
 ##################### Runtime section ####################
 #---------------------------------------------------------
