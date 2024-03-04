@@ -47,8 +47,9 @@ def main():
 
         #In case the model API call fails, we predict with local objects. 
         #We couldn't find a way of automatically call a model endpoint since apparently theres no way of
-        #retrieving the access key:
-        #https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-model-access-key.html
+        #retrieving the access key BEFORE the deployment, or there isn't a free way of getting access either.
+        #https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-model-access-key.html 
+        #We put the theoretical implementation but in the meantime, we have the prebuilt models working. 
         try:
            prediction = model.predict(transformed_variables)[0]
  
