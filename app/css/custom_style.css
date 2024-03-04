@@ -1,0 +1,6 @@
+/* Style to center the image*/
+.center_loc {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
