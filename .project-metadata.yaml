@@ -23,7 +23,7 @@ environment_variables:
 
   ETL_OPERATIONS: 
     default: "no"
-    description: "Specifying the usage of the ETLs operations"
+    description: "Specifying if a ETL operation takes place and therefore, getting an updated input"
     
 #---------------------------------------------------------
 ##################### Runtime section ####################
@@ -37,7 +37,10 @@ runtimes:
 ## Below are some sample tasks based on some of the most popular aspects of AMP creation.
 tasks:
 
-  ## SESSION related AMP snippet
+  #---------------------------------------------------------
+  #################### Session section #####################
+  #---------------------------------------------------------
+  
   - type: run_session
     name: Install Dependencies
     script: scripts/01_install_dependencies.py
@@ -45,74 +48,48 @@ tasks:
     kernel: python3
     cpu: 2
     memory: 4
-  
-  ## JOB related AMP snippet
- # - type: create_job
- #   name: Sample Job
- #   entity_label: sample_job
- #   script: 1_job-run-python-job/job.py
- #   arguments: None
- #   cpu: 1
- #   memory: 4
- #   short_summary: Create job to install project dependencies.
- #   environment:
- #     TASK_TYPE: CREATE/RUN_JOB
+    
+  #---------------------------------------------------------
+  ########### Extract, Transform and Load section ##########
+  #---------------------------------------------------------
 
- # - type: run_job
- #   entity_label: sample_job
- #   short_summary: Short summary here about running the job you just created.
+  - type: create_job
+    name: Hurricane ETL
+    entity_label: etl_execution
+    script: scripts/022_transform_and_load_data.py
+    arguments: None
+    short_summary: Job to apply the ETL process.
+    environment:
+      TASK_TYPE: CREATE/RUN_JOB
 
-  ## MODEL related AMP snippet
- # - type: create_model
- #   name: model-name
- #   entity_label: sample-model-entity-label
- #   description: create sample model hosted in CML. 
- #   short_summary: Model name
- #   default_resources:
- #     cpu: 2
- #     memory: 4
- #     gpu: 1
- #   default_replication_policy:
- #     type: fixed
- #     num_replicas: 1
-  
- # - type: build_model
- #   name: Build Sample model
- #   entity_label: sample-model-entity-label
- #   comment: First build by the AMP
- #   examples:
- #     - request:
- #         prompt: What is Cloudera?
- #         temperature: 0
- #         max_new_tokens: 50
- #         repetition_penalty: 0.5
-
-#    target_file_path: 2_model-deploy-model/launch-model.py
-#    target_function_name: api_wrapper
-
-#  - type: deploy_model
-#    entity_label: sample-model-entity-label
+  - type: run_job
+    entity_label: etl_execution
+    cpu: 2
+    memory: 4
+    short_summary: Run ETL job.
+    long_summary: >-
+      Running the job to apply the ETL process.
 
   #---------------------------------------------------------
   ###### Feature Engineering and Traing Model section ######
   #---------------------------------------------------------
 
-  #- type: create_job
-  #  name: Train hurricane prediction model
-  #  entity_label: train_model
-  #  script: scripts/04_train_model.py
-  #  arguments: None
-  #  short_summary: Job to train model.
-  #  environment:
-  #    TASK_TYPE: CREATE/RUN_JOB
+  - type: create_job
+    name: Train hurricane prediction model
+    entity_label: train_model
+    script: scripts/04_train_model.py
+    arguments: None
+    short_summary: Job to train model.
+    environment:
+      TASK_TYPE: CREATE/RUN_JOB
 
-  #- type: run_job
-  #  entity_label: train_model
-  #  cpu: 2
-  #  memory: 4
-  #  short_summary: Run model training job.
-  #  long_summary: >-
-  #    Running the job to train models.
+  - type: run_job
+    entity_label: train_model
+    cpu: 2
+    memory: 4
+    short_summary: Run model training job.
+    long_summary: >-
+      Running the job to train models.
       
   #---------------------------------------------------------
   ############ Create, Build and Deploy sections ###########
@@ -125,10 +102,10 @@ tasks:
   ################### Application section ##################
   #---------------------------------------------------------
   
-  - type: start_application
-    name: CECALT Application
-    short_summary: CECALT implementation for wind speed prediction. 
-    subdomain: hurricane-prediction
-    script: scripts/06_launch_app.py
-    environment_variables:
-     TASK_TYPE: START_APPLICATION
+  #- type: start_application
+  #  name: CECALT Application
+  #  short_summary: CECALT implementation for wind speed prediction. 
+  #  subdomain: hurricane-prediction
+  #  script: scripts/06_launch_app.py
+  #  environment_variables:
+  #   TASK_TYPE: START_APPLICATION
