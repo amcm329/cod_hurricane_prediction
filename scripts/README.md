@@ -10,26 +10,25 @@ Open the file `01_install_dependencies.py` in a normal workbench Python3 session
 
 ### 02 - Download and clean data (Optional)
 
+Open the file `022_transform_and_load_data.py` in a normal workbench Python3 session. A 2 CPU / 4 GB instance is desirable. Then **Run > Run All Lines**
+
+**Note:** this step relies on the API Meteostat and because of it, a lag might be present.
 
 ### 03 - Exploratory Data Analysis (Optional)
 
 This is a Jupyter Notebook that does some basic data exploration and visualization. It is here to show how this would be part of the data science workflow.
 
-Open a Jupyter Notebook session (rather than a work bench): Python3, 2 CPU, 8 GB and open the `2_data_analysis.ipynb` file. 
+Open a **JupyterLab** session: Python3, 2 CPU, 4 GB and open the `03_exploratory_data_analysis.ipynb` file. 
 
 At the top of the page click **Cells > Run All**.
 
-### 3 - Data Processing
-
-Open `3_data_processing.py` in a Workbench session: Python3, 4 CPU, 12 GB. Run the file.
-
 ### 5 - Model Train
 
-If you want to train a new model, use the **[Jobs](https://docs.cloudera.com/machine-learning/cloud/jobs-pipelines/topics/ml-creating-a-job.html)** feature for ad-hoc, recurring, or dependent jobs to run specific scripts. To run the model training process as a job, create a new job by going to the Project window and clicking _Jobs > New Job_ and entering the following settings:
+To run the model training process as a job, create a new job by going to the Project window and clicking _Jobs > New Job_ and entering the following settings:
 
 * **Name** : Train Model
 
-* **Script** : 5_model_train.py
+* **Script** : 04_train_model.py
 
 * **Arguments** : _Leave blank_
 
@@ -37,11 +36,14 @@ If you want to train a new model, use the **[Jobs](https://docs.cloudera.com/mac
 
 * **Schedule** : Manual
 
-* **Engine Profile** : 4 vCPU / 8 GiB
+* **Engine Profile** : 2 vCPU / 4 GiB
 
   The rest can be left as is. Once the job has been created, click **Run** to start a manual run for that job.
 
-### 6 - Model Serve
+  **Note:**: an environment flag ** ** is related to this process.
+
+
+### 5 - Model Serve
 
 The **[Models](https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-creating-and-deploying-a-model.html)** feature is used to deploy a machine learning model into production for real-time prediction. To deploy the model that was trained in the previous step: from  to the Project page, click **Models > New Model** and create a new model with the following details:
 
