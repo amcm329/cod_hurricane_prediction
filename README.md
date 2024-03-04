@@ -54,8 +54,15 @@ In general, the project contains mechanisms to guarantee a safe execution but if
 
 ----
 ### **IMPORTANT**
-The module corresponding to the model deploy has been disabled for the complete execution as it alwayws throws the following error despite the library **joblib** being installed and imported already: 
+The module corresponding to the model deploy has been disabled for the complete execution as it always throws the following error despite the library **joblib** being installed and imported already: 
 
 ![CECALT_OUTPUT](static/ERROR.PNG)
+
+But you can execute it manually and it works:
+
+![CECALT_OUTPUT](static/ERROR2.PNG)
+
+
+
 
 But if you want to execute the process individually, it works.
