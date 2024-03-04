@@ -46,6 +46,9 @@ def main():
         transformed_variables = pipeline.transform(input_variables)
 
         #In case the model API call fails, we predict with local objects. 
+        #We couldn't find a way of automatically call a model endpoint since apparently theres no way of
+        #retrieving the access key:
+        #https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-model-access-key.html
         try:
            prediction = model.predict(transformed_variables)[0]
  
