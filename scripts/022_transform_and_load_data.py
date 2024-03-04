@@ -317,7 +317,7 @@ def clean_and_transform_data():
         if "pdf" in filename: 
            fullpath = os.path.join(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs/", filename)
            txt_file_name = fullpath.replace("pdf","txt")
-           print(text_file)
+           print(txt_file_name)
            text_file = open(txt_file_name, 'wt')
            text = convert2text(fullpath)
            text_file.write(text)
