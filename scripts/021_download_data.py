@@ -50,50 +50,44 @@ class QuoteSpider(scrapy.Spider):
     start_urls = aux_urls
     #print(start_urls)
 
+
     """
        Function that extracts from a html document the URLS contanining "PDF" references.
     """
     def parse(self, response):
+
+        #A file of urls will be created so we can then extract them. 
+        final_links = []
         HDR_SELECTOR = '.hdr'
         base_url = "https://www.nhc.noaa.gov/data/tcr/"
-        final_links = []
         
-        #Pattern to recognize only pdfs 
+        #Pattern to recognize only pdfs. 
         pattern = re.compile("^[A-Za-z0-9]+_[A-Za-z0-9]+.pdf$")
-        
-        handler = open("url_links.txt","a")
+
+        #Opening the file of urls.
+        handler = open(os.getenv("OPERATING_SYSTEM_PATH") + "src/data/preprocessing/url_links.txt","a")
     
         for hdr in response.css(HDR_SELECTOR):
-            #print(dir(hdr))
-            
-            # yield {
-            #     'text': quote.css(TEXT_SELECTOR).extract_first(),
-            #     'author': quote.css(AUTHOR_SELECTOR).extract_first(),
-            # }
-
+            #Extracting links.
             current_links = hdr.xpath('a/@href').extract()
-            #print(hdr.xpath('a/@href').extract())
-            
+            #print(hdr.xpath('a/@href').extract())  
             #print(hdr.css(AHREF_SELECTOR).extract_first()) 
-            
             
             for element in current_links: 
 
                 splitted_element = element.split("/")[-1]
-                
                 #print(splitted_element)
 
+                #Adding only pdfs to the list of urls. 
                 if not(pattern.match(splitted_element) is None):     
                    complete_url = base_url + splitted_element                
                    final_links.append(complete_url)
                    
                    handler.write(complete_url + "\n")
                    
-                   print(complete_url)
+                   #print(complete_url)
                    #filename = wget.download(complete_url, out=splitted_element)
-
-
-                   
+         
         handler.close()         
         #print(final_links)         
             
