@@ -298,7 +298,7 @@ def clean_and_transform_data():
     #Step 2: getting all pds based on the mentioned links.
     print("Executing step 2...")
     handler = open(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/url_links.txt","r")
-    lines = handler.read_lines()
+    lines = handler.readlines()
     handler.close()
 
     for complete_url in lines: 
