@@ -30,9 +30,12 @@ The project is organized with the following folder structure:
 ├── scripts/        # Scripts used for the creation and deploy of the end-to-end solution
 ├── src/            # All the prebuilt models and datasets necessary for the project
 ├── static/         # All images used in the project
-├── README.md
+├── .gitignore
+├── .project-metadata.yaml
 ├── Hurricane_Behavior_Predictor_SOP.docx
 ├── LICENSE.txt
+├── README.md
+├── cdsw-build.sh  # This file is IMPORTANT for model deployment as additional libraries are installed here.
 └── requirements.txt
 
 ```
