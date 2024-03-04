@@ -27,8 +27,6 @@ import pickle
 import numpy as np
 import pandas as pd
 
-!pip install joblib
-
 import joblib
 
 model = None 
