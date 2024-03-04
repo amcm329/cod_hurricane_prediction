@@ -53,75 +53,75 @@ tasks:
   ########### Extract, Transform and Load section ##########
   #---------------------------------------------------------
 
- # - type: create_job
- #   name: Hurricane ETL
- #   entity_label: etl_execution
- #   script: scripts/022_transform_and_load_data.py
- #   arguments: None
- #   short_summary: Job to apply the ETL process.
- #   environment:
- #     TASK_TYPE: CREATE/RUN_JOB
+  - type: create_job
+    name: Hurricane ETL
+    entity_label: etl_execution
+    script: scripts/022_transform_and_load_data.py
+    arguments: None
+    short_summary: Job to apply the ETL process.
+    environment:
+      TASK_TYPE: CREATE/RUN_JOB
 
- # - type: run_job
- #   entity_label: etl_execution
- #   cpu: 2
- #   memory: 4
- #   short_summary: Run ETL job.
- #   long_summary: >-
- #     Running the job to apply the ETL process.
+  - type: run_job
+    entity_label: etl_execution
+    cpu: 2
+    memory: 4
+    short_summary: Run ETL job.
+    long_summary: >-
+      Running the job to apply the ETL process.
 
   #---------------------------------------------------------
   ###### Feature Engineering and Traing Model section ######
   #---------------------------------------------------------
 
- # - type: create_job
- #   name: Train hurricane prediction model
- #   entity_label: train_model
- #   script: scripts/04_train_model.py
- #   arguments: None
- #   short_summary: Job to train model.
- #   environment:
- #     TASK_TYPE: CREATE/RUN_JOB
+  - type: create_job
+    name: Train hurricane prediction model
+    entity_label: train_model
+    script: scripts/04_train_model.py
+    arguments: None
+    short_summary: Job to train model.
+    environment:
+      TASK_TYPE: CREATE/RUN_JOB
 
- # - type: run_job
- #   entity_label: train_model
- #   cpu: 2
- #   memory: 4
- #   short_summary: Run model training job.
- #   long_summary: >-
- #     Running the job to train models.
+  - type: run_job
+    entity_label: train_model
+    cpu: 2
+    memory: 4
+    short_summary: Run model training job.
+    long_summary: >-
+      Running the job to train models.
       
   #---------------------------------------------------------
   ############ Create, Build and Deploy sections ###########
   #---------------------------------------------------------
   #Note: all create, build and deploy must be implemented or removed completely together.
 
-  - type: create_model
-    name: Hurricane prediction model endpoint
-    entity_label: hurricane_model
-    description: This model api endpoint predicts wind speeds
-    short_summary: Create the hurricane prediction model api endpoint
+  #- type: create_model
+  #  name: Hurricane prediction model endpoint
+  #  entity_label: hurricane_model
+  #  description: This model api endpoint predicts wind speeds
+  #  short_summary: Create the hurricane prediction model api endpoint
    
-  - type: build_model
-    name: Hurricane prediction model API endpoint
-    entity_label: hurricane_model
-    comment: Build hurricane prediction model
-    examples:
-      - request: { "feature": "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" } 
-        response: 425
-    target_file_path: scripts/05_model_serve.py
-    target_function_name: predict_wind_speed
-    environment_variables:
-      TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
+  #- type: build_model
+  #  name: Hurricane prediction model API endpoint
+  #  entity_label: hurricane_model
+  #  comment: Build hurricane prediction model
+  #  examples:
+  #    - request: { "feature": "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" } 
+  #      response: 425
+  #  target_file_path: scripts/05_model_serve.py
+  #  target_function_name: predict_wind_speed
+  #  environment_variables:
+  #    TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
 
-  - type: deploy_model
-    name: hurricane_prediction_model
-    entity_label: hurricane_model
-    cpu: 2
-    memory: 4
-    gpu: 0
-    environment_variables:
-      TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
+  #- type: deploy_model
+  #  name: hurricane_prediction_model
+  #  entity_label: hurricane_model
+  #  cpu: 2
+  #  memory: 4
+  #  gpu: 0
+  #  environment_variables:
+  #    TASK_TYPE: CREATE/BUILD/DEPLOY_MODEL
       
   #---------------------------------------------------------
   ################### Application section ##################
