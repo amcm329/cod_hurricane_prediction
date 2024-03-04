@@ -16,14 +16,15 @@ environment_variables:
   OPERATING_SYSTEM_PATH:
     default: "/home/cdsw/"
     description: "The full path needed to read all necessary files and variables"
+    
+  ETL_OPERATIONS: 
+    default: "no"
+    description: "Specifying if a ETL operation takes place and therefore, getting an updated input"
 
   USE_PREBUILT_MODEL: 
     default: "yes"
     description: "Specifying the usage of a prebuilt model"
 
-  ETL_OPERATIONS: 
-    default: "no"
-    description: "Specifying if a ETL operation takes place and therefore, getting an updated input"
     
 #---------------------------------------------------------
 ##################### Runtime section ####################
