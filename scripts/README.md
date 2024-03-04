@@ -67,3 +67,6 @@ CECALT application concatenates all analytical power with a simple yet powerful 
 * **Engine Profile**: 1vCPU / 2 GiB Memory
 
 Then click "Create Application". After the Application deploys, click on the blue-arrow next to the name to launch the application in a new window.
+
+**Note:**: it might require some credentials to log in, these are the same ones provided for the Workbench.
+
