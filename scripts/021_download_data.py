@@ -26,15 +26,20 @@ class QuoteSpider(scrapy.Spider):
       name = "spider-pdf"
       #Here will be stored all the LINKS to the pfds.
       aux_urls = []
-      initial_year = 2023#2002
       count = 0
+     
+      initial_year = 2002
+      
       #It's year + 1
       final_year = 2024
+     
+      #Limit of years in case you don't want to execute the whole scenario.
+      limit = 1
 
       #We are getting only the urls of etl files
       for x in range(initial_year,final_year):
 
-          if count < 1:   
+          if count < limit:   
               #Adding only available regions (Atlantic, Pacific, Central):
               for z in ["atl","epac","cpac"]:
 
