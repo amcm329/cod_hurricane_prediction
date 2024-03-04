@@ -25,9 +25,12 @@ def clean_and_transform_data():
   
     !scrapy runspider scraper.py
 
-    handler = open()
+    handler = open(os.getenv("OPERATING_SYSTEM_PATH") + "src/data/preprocessing/url_links.txt","a")
+    lines = handler.read_lines()
+    handler.close()
 
-    filename = wget.download(complete_url, out=splitted_element)
+    for complete_url in lines: 
+        filename = wget.download(complete_url, out=splitted_element)
 
 
 if __name__ == "__main__":
