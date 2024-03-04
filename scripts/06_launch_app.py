@@ -10,11 +10,11 @@ from flask import Flask, send_from_directory, request
 log = logging.getLogger("werkzeug")
 log.setLevel(logging.ERROR)
 
-app = Flask(__name__, static_url_path="")
+app = Flask(__name__, template_folder = "app")
 
 @app.route("/")
 def home():
-    return "<script> window.location.href = '/app/index.html'</script>"
+    return "<script> window.location.href = 'app/index.html'</script>"
 
 
 @app.route("/app/<path:path>")
