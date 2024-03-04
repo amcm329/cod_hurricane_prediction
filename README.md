@@ -50,17 +50,10 @@ The ways of executing the project are the following ones:
 
 2. **Manual Setup** - In a CML workspace, click "New Project", add a Project Name, select "Git" as the Initial Setup option, copy in the [repo URL](https://github.com/amcm329/cod_hurricane_prediction), click "Create Project". Then, follow the steps listed [in this document](scripts/README.md).
 
-
 ----
 ### **Note**
 In general, the project contains mechanisms to guarantee a safe execution but if anything happens, it would be desirable to check both the documentation and the [technical configuration](scripts/README.md).
 
 ----
 ### **IMPORTANT**
-The module corresponding to the model deploy has been disabled for the complete execution as it always throws the following error despite the library **joblib** being installed and imported already: 
-
-![CECALT_OUTPUT](static/ERROR.PNG)
-
-But you can execute it individually and manually and it works:
-
-![CECALT_OUTPUT](static/ERROR2.PNG)
+DO NOT remove cdsw-build.sh as it will cause troubles in the deployment.
