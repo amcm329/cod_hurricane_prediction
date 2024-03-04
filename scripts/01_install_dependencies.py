@@ -1,8 +1,8 @@
 
 
 # Install the requirements located in the file requirements.txt
-!pip install --upgrade pip
-!pip install --no-cache-dir --progress-bar off -r requirements.txt
+!pip3 install --upgrade pip
+!pip3 install --no-cache-dir --progress-bar off -r requirements.txt
 
 #Section for environment variables: 
 import os
