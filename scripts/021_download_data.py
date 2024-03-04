@@ -51,10 +51,10 @@ class QuoteSpider(scrapy.Spider):
       #print(start_urls)
 
 
-    """
-       Function that extracts from a html document the URLS contanining "PDF" references.
-    """
-    def parse(self, response):
+      """
+         Function that extracts from a html document the URLS contanining "PDF" references.
+      """
+      def parse(self, response):
 
         #A file of urls will be created so we can then extract them. 
         final_links = []
