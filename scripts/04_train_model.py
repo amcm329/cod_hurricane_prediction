@@ -41,7 +41,9 @@ def execute_training():
     #---------------------------------------------------------
     ############### Feature Engineering section ##############
     #---------------------------------------------------------
-
+    
+    print("Executing Feature Engineering section...")
+     
     # Reading dataframe.
     df = pd.read_csv(input)
 
@@ -75,6 +77,8 @@ def execute_training():
     #################### Training section ####################
     #---------------------------------------------------------
 
+    print("Executing Training section...")
+
     # Combining Random Forest, XGB and SNN to predict wind speed in X_train_selected_reduced.
 
     # Define the Random Forest model.
@@ -105,6 +109,8 @@ def execute_training():
     #################### Testing section #####################
     #---------------------------------------------------------
 
+    print("Executing Testing section...")
+
     # Evaluating the model with testing dataset.
     y_pred_test = ensemble_model3.predict(X_test_transformed)
     print("Mean squared error:", mean_squared_error(y_test, y_pred_test))
@@ -116,10 +122,12 @@ def execute_training():
     #################### Saving section #####################
     #---------------------------------------------------------
 
+    print("Executing Saving section...")
     # Saving both pipeline and model objects. 
     joblib.dump(pipeline, pipeline_file)
     joblib.dump(ensemble_model3, ensemble_model3_file)
 
+    print("Process completed.")
 
 #---------------------------------------------------------
 ###################### Main section ######################
