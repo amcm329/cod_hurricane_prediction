@@ -1,14 +1,13 @@
 import os
 import flask
 import pickle
-import joblib
+import requests
+from joblib import load
 
 #This doesn't start with slash
-with open(f'/home/cdsw/src/prebuilt-models/ensemble_model3.pkl','rb') as f:
-    model = joblib.load(f)
+model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
+pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl")
 
-with open(f'/home/cdsw/src/prebuilt-models/pipeline.pkl','rb') as f:
-    pipeline = joblib.load(f)
 
 #Changed to app folder
 #By default template_folder is "template"
@@ -36,11 +35,16 @@ def main():
                             humidity, 0, 0, wind_direction, avg_pressure, avg_windspeed, wind_speed_ratio,
                             ]]
 
+        prediction = None 
         transformed_variables = pipeline.transform(input_variables)
-        prediction = model.predict(transformed_variables)[0]
 
-        #Poner aqui lo de la llamada.  
-        
+        #In case the call fails, we predict with local objects. 
+        try:
+           prediction = model.predict(transformed_variables)[0]
+ 
+        except:     
+           prediction = model.predict(transformed_variables)[0]
+  
         return flask.render_template('index.html',
                                      original_input = {'Latitude':latitude,'Longitude':longitude,'Pressure':pressure, 
                                                       'Average Pressure':avg_pressure,'Air Temperature':air_temperature,
