@@ -46,14 +46,19 @@ def main():
         transformed_variables = pipeline.transform(input_variables)
 
         #In case the model API call fails, we predict with local objects. 
-        #We couldn't find a way of automatically call a model endpoint since apparently theres no way of
+        #We couldn't find a way of automatically call a model endpoint since apparently theres no chance of
         #retrieving the access key BEFORE the deployment, or there isn't a free way of getting access either.
-        #https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-model-access-key.html 
+        
+         #https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-model-access-key.html 
+         
         #We put the theoretical implementation but in the meantime, we have the prebuilt models working. 
         try:
+           import requests
            prediction = model.predict(transformed_variables)[0]
- 
-        except:     
+           #r = requests.post('http://modelservice.cdsw.44.232.253.206.nip.io/model', data='{"accessKey":"m03jfhnxm1ea6hhdoia94qa3p0kceuse","request":{"feature":"0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0"}}', headers={'Content-Type': 'application/json'})  
+           #prediction = r["result"]
+        
+         except:     
            prediction = model.predict(transformed_variables)[0]
   
         return flask.render_template('index.html',
@@ -65,5 +70,4 @@ def main():
                                      latitude_x = latitude,
                                      longitude_y = longitude)
 if __name__ == '__main__':
-    #app.run()
     app.run(host="127.0.0.1", port=int(os.environ["CDSW_READONLY_PORT"]))
