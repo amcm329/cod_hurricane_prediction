@@ -2,17 +2,21 @@
 
 In order to execute the module manually, follow these steps. It is important to mention that, inside each one of the codes, there are explanations and hints on how to properly execute them.
 
+
 ### 01 - Install dependencies
 
 **Note**: this step *must* be executed in the beginning.
 
 Open the file `01_install_dependencies.py` in a normal workbench Python3 session. A 1 CPU / 2 GB instance is enough. Then **Run > Run All Lines**
 
+
 ### 02 - Download and clean data (Optional)
 
 Open the file `022_transform_and_load_data.py` in a normal workbench Python3 session. A 2 CPU / 4 GB instance is desirable. Then **Run > Run All Lines**
 
 **Note:** this step relies on the API Meteostat and because of it, a lag might be present.
+**Note:**: an environment flag **ETL_OPERATIONS** is related to this process.
+
 
 ### 03 - Exploratory Data Analysis (Optional)
 
@@ -21,6 +25,7 @@ This is a Jupyter Notebook that does some basic data exploration and visualizati
 Open a **JupyterLab** session: Python3, 2 CPU, 4 GB and open the `03_exploratory_data_analysis.ipynb` file. 
 
 At the top of the page click **Cells > Run All**.
+
 
 ### 5 - Model Train
 
@@ -40,12 +45,12 @@ To run the model training process as a job, create a new job by going to the Pro
 
   The rest can be left as is. Once the job has been created, click **Run** to start a manual run for that job.
 
-  **Note:**: an environment flag ** ** is related to this process.
+  **Note:**: an environment flag **USE_PREBUILT_MODEL** is related to this process.
 
 
 ### 5 - Model Serve
 
-The **[Models](https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-creating-and-deploying-a-model.html)** feature is used to deploy a machine learning model into production for real-time prediction. To deploy the model that was trained in the previous step: from  to the Project page, click **Models > New Model** and create a new model with the following details:
+To deploy the model that was trained in the previous step: from  to the Project page, click **Models > New Model** and create a new model with the following details:
 
 * **Name**: Flight Delay Prediction Model
 * **Description**: This model API endpoint predicts flight delays
