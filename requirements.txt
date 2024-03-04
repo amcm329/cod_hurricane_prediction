@@ -6,6 +6,8 @@ scikit-learn==1.2.2
 xgboost==2.0.3
 protobuf==3.20
 faiss-cpu==1.7.2
+#Special
+streamlit==1.8.1
 
 #For scripts 021_download_data.py, 022_transform_and_load.py and 03_exploratory_data_analysis.ipynb
 meteostat==1.6.7
