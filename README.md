@@ -31,12 +31,12 @@ The project is organized with the following folder structure:
 ├── src/            # All the prebuilt models and datasets necessary for the project
 ├── static/         # All images used in the project
 ├── README.md
-├── Documentation.doc
+├── Hurricane Behavior Predictor_SOP.docx
 ├── LICENSE.txt
 └── requirements.txt
 
 ```
-The file  `Documentation.doc` contains a deeper walk-through of the project. 
+The file  `Hurricane Behavior Predictor_SOP.docx` contains a deeper walk-through of the project. 
 
 
 ## Deploying on Cloudera
