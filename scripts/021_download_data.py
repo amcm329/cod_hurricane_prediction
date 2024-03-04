@@ -65,7 +65,7 @@ class QuoteSpider(scrapy.Spider):
         pattern = re.compile("^[A-Za-z0-9]+_[A-Za-z0-9]+.pdf$")
 
         #Opening the file of urls.
-        handler = open(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/url_links.txt","a")
+        handler = open(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/url_links.txt","w")
     
         for hdr in response.css(HDR_SELECTOR):
             #Extracting links.
