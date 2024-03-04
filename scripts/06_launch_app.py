@@ -14,7 +14,7 @@ app = Flask(__name__, template_folder = "app")
 
 @app.route("/")
 def home():
-    return "<script> window.location.href = 'app/index.html'</script>"
+    return "<script> window.location.href = '/app/index.html'</script>"
 
 
 @app.route("/app/<path:path>")
