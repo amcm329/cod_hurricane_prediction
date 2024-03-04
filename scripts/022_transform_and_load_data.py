@@ -459,7 +459,7 @@ def clean_and_transform_data():
     print("Executing step 5...")
 
     #Concatenating all csvs.
-    csv_path = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/csvs/
+    csv_path = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/csvs/"
     all_elements = os.listdir(csv_path)
 
     list_of_dfs = []
