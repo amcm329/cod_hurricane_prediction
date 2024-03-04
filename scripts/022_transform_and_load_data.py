@@ -13,7 +13,7 @@ def clean_and_transform_data():
 if __name__ == "__main__":
 
     #If the option is whether explicit or it doesn't exist, we use the prebuilt model.
-    if os.environ["CLEAN_AND_TRANSFORM_DATA"] == "yes" or os.environ["CLEAN_AND_TRANSFORM_DATA"] is None:
+    if os.environ["ETL_OPERATIONS"] == "yes" or os.environ["ETL_OPERATIONS"] is None:
         print("Using default dataset")
          
     else:
