@@ -107,7 +107,7 @@ tasks:
     entity_label: hurricane_model
     comment: Build hurricane prediction model
     examples:
-      - request: { "features": "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" } 
+      - request: { "feature": "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" } 
         response: 425
     target_file_path: scripts/05_model_serve.py
     target_function_name: predict_wind_speed
