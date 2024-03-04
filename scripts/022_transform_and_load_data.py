@@ -299,8 +299,7 @@ def clean_and_transform_data():
     handler.close()
 
     for complete_url in lines: 
-        if complete_url != "" or complete_url != " ": 
-           filename = wget.download(complete_url, out = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs")
+        filename = wget.download(complete_url, out = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs")
     
     #-------------------------------------------------------------------
     #-------------------------------------------------------------------
