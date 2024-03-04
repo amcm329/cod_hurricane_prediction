@@ -299,8 +299,10 @@ def clean_and_transform_data():
     handler.close()
 
     for complete_url in lines: 
-        filename = wget.download(complete_url, out = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs")
-    
+        try:
+           filename = wget.download(complete_url, out = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs")
+        except:
+           pass
     #-------------------------------------------------------------------
     #-------------------------------------------------------------------
     #-------------------------------------------------------------------
