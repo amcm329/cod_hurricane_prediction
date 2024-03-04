@@ -17,7 +17,7 @@ The ensembling model uses a voting strategy to make its predictions, where each 
 
 This model is trained on a dataset of wind speed data and evaluated using MSE (Mean Squared Error), MAE (Mean Absolute Error), R2 score and RMSE (Root Mean Square Error) metrics.
 
-The dataset used in this project comes from the [National Hurricane Center](https://www.nhc.noaa.gov/) and the [Meteostat Project](https://meteostat.net/en/), with the aid of [analysis and transformations](scripts/exploratory_data_analysis.ipynb). 
+The dataset used in this project comes from the [National Hurricane Center](https://www.nhc.noaa.gov/) and the [Meteostat Project](https://meteostat.net/en/), with the aid of [analysis](scripts/exploratory_data_analysis.ipynb) and [transformations](scripts/022_transform_and_load_data.py)
 
 
 ## Project Structure
