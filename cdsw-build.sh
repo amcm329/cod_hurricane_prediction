@@ -1,1 +1,2 @@
-pip install --no-cache-dir -r 2_model-deploy-model/model-requirements.txt
+#!/bin/bash
+pip3 install -r requirements.txt
