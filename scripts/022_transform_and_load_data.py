@@ -21,22 +21,34 @@ import wget
 import meteostat
 import pandas as pd
 
+"""
+  The following operation gathers all the steps mentioned previously.
+"""
 def clean_and_transform_data():
-  
+
+    #Step 1: retrieving all the valid urls from the NOAA website.
     !scrapy runspider scraper.py
 
-    handler = open(os.getenv("OPERATING_SYSTEM_PATH") + "src/data/auxiliary/url_links.txt","a")
+    #Step 2: getting all pds based on the mentioned links.
+    handler = open(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/url_links.txt","a")
     lines = handler.read_lines()
     handler.close()
 
     for complete_url in lines: 
-        filename = wget.download(complete_url, out=splitted_element)
+        filename = wget.download(complete_url, out= os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs")
+
+   
+    #Step 3: 
+
+    #Step 4: 
+
+    #Step 5: 
 
 
 if __name__ == "__main__":
 
     #If the option is whether explicit or it doesn't exist, we use the prebuilt model.
-    if os.environ["ETL_OPERATIONS"] == "yes" or os.environ["ETL_OPERATIONS"] is None:
+    if os.environ["ETL_OPERATIONS"] == "no" or os.environ["ETL_OPERATIONS"] is None:
         print("Using default dataset")
          
     else:
