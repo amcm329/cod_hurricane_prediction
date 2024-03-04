@@ -47,8 +47,8 @@ class QuoteSpider(scrapy.Spider):
 
           count += 1 
            
-    start_urls = aux_urls
-    #print(start_urls)
+      start_urls = aux_urls
+      #print(start_urls)
 
 
     """
