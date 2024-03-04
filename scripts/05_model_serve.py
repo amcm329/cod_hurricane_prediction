@@ -21,13 +21,13 @@ if use_prebuilt_model is None:
    #Element doesn't exist.
    os.environ["USE_PREBUILT_MODEL"] = "yes"
 
+from joblib import dump, load
 import cdsw
 import json
 import pickle
 import numpy as np
 import pandas as pd
 
-from joblib import dump, load
 
 model = None 
 pipeline = None 
