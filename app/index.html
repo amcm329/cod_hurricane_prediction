@@ -18,8 +18,44 @@ crossorigin=""></script>
 
 <!-- Styles -->
 <!-- Slidebar style -->
-<!-- Custom style -->
 <style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+.mySlides {display: none}
+/********** Range Input Styles **********/
+/*Range Reset*/
+input[type="range"] {
+   -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 15rem;
+}
+
+/* Removes default focus */
+input[type="range"]:focus {
+  outline: none;
+}
+
+/***** Chrome, Safari, Opera and Edge Chromium styles *****/
+/* slider track */
+input[type="range"]::-webkit-slider-runnable-track {
+   background-color: #053a5f;
+   border-radius: 0.5rem;
+   height: 0.5rem;  
+}
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+   appearance: none;
+   margin-top: -12px; /* Centers thumb on the track */
+
+   /*custom styles*/
+   background-color: #5cd5eb;
+   height: 2rem;
+   width: 1rem;
+}
+
 input[type="range"]:focus::-webkit-slider-thumb {   
   border: 1px solid #053a5f;
   outline: 3px solid #053a5f;
@@ -53,17 +89,16 @@ input[type="range"]:focus::-moz-range-thumb {
 </style>
 
 <style>
-/* Style to center the image*/
+  /* Style to center the image*/
   .center_loc {
       display: block;
       margin-left: auto;
       margin-right: auto;
-}
-</style>  
-  
-</head>
+  }
+</style>
 
-  <body class="w3-content w3-border-left w3-border-right">
+</head>
+<body class="w3-content w3-border-left w3-border-right">
 
 
 
@@ -76,7 +111,7 @@ input[type="range"]:focus::-moz-range-thumb {
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
     <h3>Parameters</h3>
     <hr>
-    <form type="submit" method="POST" onclick="go_fetch()">
+    <form action="{{ url_for('main') }}" method="POST" onsubmit="return actualizarMapa()">
       <p><label><i class="fa fa-globe"></i> Latitude</label></p>
       <input class="w3-input w3-border" type="number" value="0.0000" id="latitude" name="latitude" min="-90" max="90" step="0.0001" required>      
       <p><label><i class="fa fa-globe"></i> Longitude</label></p>
@@ -114,7 +149,7 @@ input[type="range"]:focus::-moz-range-thumb {
     <img class= "center_loc" src="/static/logo.jpg" width="133" height="168" align="center">
 
     <h4><strong>About</strong></h4>
-    <p>The algorithm used is an ensemble learning model that combines the predictors of three base models:</p>
+    <p>The algorithim used is an ensemble learning model that combines the predictors of three base models:</p>
     <p>- Random Forest Regressor</p>
     <p>- XGBoost Regressor</p>
     <p>- Neuronal Network Regressor</p>
@@ -168,7 +203,4 @@ input[type="range"]:focus::-moz-range-thumb {
   <hr>
 
 </body>
-
-<script src="js/script.js"></script>}
-  
 </html>
