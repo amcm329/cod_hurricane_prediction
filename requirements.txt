@@ -2,8 +2,6 @@
 numpy==1.25.2
 scipy==1.11.4
 pandas==1.5.3
-#joblib==1.3.2
-joblib==1.0.0
 scikit-learn==1.2.2
 xgboost==2.0.3
 protobuf==3.20
@@ -35,3 +33,5 @@ pyspark==3.5.1
 
 #IMPORTANT: this library is installed only to solve a problem with Scrapy.
 Twisted==22.10.0
+
+joblib==1.3.2
