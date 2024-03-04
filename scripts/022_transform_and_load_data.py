@@ -29,6 +29,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 from meteostat import Point, Daily, Hourly, Stations
 
+global df_stations_dict
 
 """
   Auxiliary function for Step 2.
