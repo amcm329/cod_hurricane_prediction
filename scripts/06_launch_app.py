@@ -4,10 +4,17 @@ import pickle
 import requests
 from joblib import load
 
+import os
+
+full_path = os.getenv("OPERATING_SYSTEM_PATH")
+     
+if full_path is None: 
+   #Element doesn't exist.
+   os.environ["OPERATING_SYSTEM_PATH"] = "/home/cdsw/"
+
 #This doesn't start with slash
 model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
 pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl")
-
 
 #Changed to app folder
 #By default template_folder is "template"
@@ -38,7 +45,7 @@ def main():
         prediction = None 
         transformed_variables = pipeline.transform(input_variables)
 
-        #In case the call fails, we predict with local objects. 
+        #In case the model API call fails, we predict with local objects. 
         try:
            prediction = model.predict(transformed_variables)[0]
  
