@@ -34,7 +34,7 @@ class QuoteSpider(scrapy.Spider):
       #We are getting only the urls of etl files
       for x in range(initial_year,final_year):
 
-          if count < 3:   
+          if count < 1:   
               #Adding only available regions (Atlantic, Pacific, Central):
               for z in ["atl","epac","cpac"]:
 
