@@ -19,14 +19,15 @@ if full_path is None:
 
 import re
 import json
+import math
 import time
 import wget
 import PyPDF2 
-import meteostat
 import pdfplumber
 import numpy as np
 import pandas as pd
 from datetime import datetime, timedelta
+from meteostat import Point, Daily, Hourly, Stations
 
 
 """
@@ -76,16 +77,17 @@ def clean_and_transform_data():
     #Step 3: Extracting quantitative information from pdfs.  
     print("Executing step 3...")
     for filename in os.listdir(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs/"):
-        fullpath = os.path.join(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs/", filename)
-        txt_file_name = fullpath.replace("pdf","txt")
-        text_file = open(txt_file_name, 'wt')
-        text = convert2text(fullpath)
-        text_file.write(text)
-        text_file.close()
+        if "pdf" in filename: 
+           fullpath = os.path.join(os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/pdfs/", filename)
+           txt_file_name = fullpath.replace("pdf","txt")
+           text_file = open(txt_file_name, 'wt')
+           text = convert2text(fullpath)
+           text_file.write(text)
+           text_file.close()
 
     print('Last file: ', filename)
 
-    #Step 4: 
+    #Step 4: Extracting relevant information from the txt.
     print("Executing step 4...")
 
     #Variable created to gather monthly information.
@@ -94,54 +96,54 @@ def clean_and_transform_data():
     output_path = os.getenv("OPERATING_SYSTEM_PATH") + "src/auxiliary/csvs/"
 
     indice = 1
-    archivos_descartados = 0
+    discarded_files = 0
 
     for filename in os.listdir(input_path):
       try:
         
-        #Lectura del txt
+        #Reading current txt
         fullpath = os.path.join(input_path, filename)
         f = open(fullpath, "r")
         txt = f.read()
 
-        # Extraemos partes del txt
+        # Extracting txt sections.
         try:
-          string_huracan_periodo = (txt.split("Table 1. Best track for ")[1]).split('.')[0]
+          string_hurricane_period = (txt.split("Table 1. Best track for ")[1]).split('.')[0]
         except:
-          string_huracan_periodo = (txt.split("Table 1. Best track data for ")[1]).split('.')[0]
+          string_hurricane_period = (txt.split("Table 1. Best track data for ")[1]).split('.')[0]
 
-        string_huracan_periodo = string_huracan_periodo.split('\n')[0]
-
-        try:
-          huracan = re.findall('^(.+?),', string_huracan_periodo)[0]
-        except:
-          huracan = re.findall('^(.+?)[0-9]', string_huracan_periodo)[0]
-
-        periodo = re.findall('[0-9].*$', string_huracan_periodo)[0]
+        string_hurricane_period = string_hurricane_period.split('\n')[0]
 
         try:
-          string_informacion = (txt.split("Table 1. Best track for ")[1]).split('Table 2.')[0]
+          hurricane = re.findall('^(.+?),', string_hurricane_period)[0]
         except:
-          string_informacion = (txt.split("Table 1. Best track data for ")[1]).split('Table 2.')[0]
+          hurricane = re.findall('^(.+?)[0-9]', string_hurricane_period)[0]
 
-        informacion = list(map(clean_1,
-                          re.findall('[0-9]+ / [0-9]+ [0-9]+.[0-9]+ [0-9]+.[0-9]+ [0-9]+ [0-9]+ [A-Za-z" ]+', string_informacion)
+        period = re.findall('[0-9].*$', string_hurricane_period)[0]
+
+        try:
+          string_information = (txt.split("Table 1. Best track for ")[1]).split('Table 2.')[0]
+        except:
+          string_information = (txt.split("Table 1. Best track data for ")[1]).split('Table 2.')[0]
+
+        information = list(map(clean_1,
+                          re.findall('[0-9]+ / [0-9]+ [0-9]+.[0-9]+ [0-9]+.[0-9]+ [0-9]+ [0-9]+ [A-Za-z" ]+', string_information)
                           )
                       )
 
-        if not informacion:
-          informacion = list(map(clean_2,
-                                re.findall('[0-9]+/[0-9]+ [0-9]+.[0-9]+ [0-9]+.[0-9]+ [0-9]+ [0-9]+ [A-Za-z" ]+', string_informacion)
+        if not information:
+          information = list(map(clean_2,
+                                re.findall('[0-9]+/[0-9]+ [0-9]+.[0-9]+ [0-9]+.[0-9]+ [0-9]+ [0-9]+ [A-Za-z" ]+', string_information)
                               )
                           )
 
-        # Extraemos informacion adicional
+        # Extracting additional information.
         words_re = re.compile("|".join(months))
-        meses = words_re.findall(string_huracan_periodo)
-        año = re.findall('[0-9]{4}', periodo)
+        current_months = words_re.findall(string_hurricane_period)
+        current_year = re.findall('[0-9]{4}', period)
 
-        # Construimos el dataframe
-        df_raw = pd.DataFrame(informacion, columns=['string'])
+        # Building the dataframe.
+        df_raw = pd.DataFrame(information, columns=['string'])
         df_raw = df_raw['string'].str.split(' ', expand=True)
         df_raw.rename(columns={0:'Date',
                               1:'Time',
@@ -151,12 +153,11 @@ def clean_and_transform_data():
                               5:'Wind Speed (kt)',
                               6:'filter'}, inplace=True)
 
-        # Quitamos informacion innecesaria
+        # Removing useless information.
         df_raw = df_raw.loc[:((df_raw.loc[::-1]['filter']=='"')).idxmax()]
         df_raw.rename(columns={'filter':6}, inplace=True)
 
-
-        # Concatenamos los campos para generar la categoria del huracan
+        # Concatenating fields to generate hurricane category.
         concept_columns = [col for col in df_raw.columns if isinstance(col, int)]
         for i in range(0,len(concept_columns)):
           value = concept_columns[i]
@@ -168,33 +169,32 @@ def clean_and_transform_data():
         df_raw['Stage'] = stage_description
         df_raw.drop(concept_columns, axis=1,inplace=True)
 
-        #limpiamos el campo de la categoria para dejarlo en orden
+        # Cleaning and sortering category field.
         df_raw['Stage'] = df_raw['Stage'].str.strip()
         df_raw['Stage'] = df_raw.Stage.replace('"', method="ffill")
 
-
-        # Obtenemos la fecha correcta y su tiempo
-        dia = df_raw.Date.loc[0]
-        fh_inicio = dia + meses[0] + año[0]
+        # Getting right date and time.
+        current_day = df_raw.Date.loc[0]
+        start_date = current_day + current_months[0] + current_year[0]
 
         df_raw['Date'] = df_raw['Date'].astype(int)
-        df_raw['days_difference'] =(df_raw.Date - df_raw.Date.shift(1).fillna(dia).astype(int))
+        df_raw['days_difference'] =(df_raw.Date - df_raw.Date.shift(1).fillna(current_day).astype(int))
         df_raw.loc[df_raw['days_difference']<0, 'days_difference'] = 1
         df_raw['cumulative'] = df_raw.days_difference.cumsum()
         temp = df_raw['cumulative'].apply(np.ceil).apply(lambda x: pd.Timedelta(x, unit='D'))
 
-        fh_inicio_date = datetime.strptime(fh_inicio, '%d%B%Y')
-        df_raw['new_date'] =  fh_inicio_date + temp
+        start_date_date = datetime.strptime(start_date, '%d%B%Y')
+        df_raw['new_date'] =  start_date_date + temp
         df_raw['new_time'] = pd.to_datetime(df_raw.Time, format='%H%M').dt.time
         df_raw['Date Time (UTC)'] = pd.to_datetime(df_raw["new_date"].astype('str') + df_raw["new_time"].astype('str'), format="%Y-%m-%d%H:%M:%S")
 
         df_raw.drop(['days_difference','cumulative','new_date','new_time','Date','Time'], axis=1,inplace=True)
 
-        #Añadimos campos adicionales
-        df_raw['Hurricane Name'] = huracan
+        # Adding additional fields.
+        df_raw['Hurricane Name'] = hurricane
         df_raw['Sequential Id'] = indice
 
-        # Ordenamos, ajustamos valores en su formato y guardamos
+        # Sorting and adjusting values, we save changes as well.
         df_clean = df_raw[['Sequential Id','Hurricane Name','Date Time (UTC)','Latitude (°N)','Longitude (°W)','Pressure (mb)','Wind Speed (kt)','Stage']]
 
         df_clean['Latitude (°N)'] = df_clean['Latitude (°N)'].astype('float')
@@ -202,24 +202,22 @@ def clean_and_transform_data():
         df_clean['Pressure (mb)'] = df_clean['Pressure (mb)'].astype(int)
         df_clean['Wind Speed (kt)'] = df_clean['Wind Speed (kt)'].astype(int)
 
-        csv_file_name = fullpath[:57]+'allcsvs/' + fullpath[65:-4]+'.csv'
+        csv_file_name = fullpath.replace("txt","csv")
         df_clean.to_csv(csv_file_name, index=False)
 
         indice = indice + 1
-        print('Termino con el archivo: ',filename,', lleva de progreso un: ',str(np.round((indice/753)*100,4)),'%')
+        print('File completed: ',filename,', with progress: ',str(np.round((indice/753)*100,4)),'%')
 
       except:
         indice = indice + 1
-        print('Termino con el archivo: ',filename,', lleva de progreso un: ',str(np.round((indice/753)*100,4)),'%')
+        print('File completed: ',filename,', with progress: ',str(np.round((indice/753)*100,4)),'%')
 
-        archivos_descartados = archivos_descartados + 1
+        discarded_files = discarded_files + 1
 
-    print('Numero de archivos descartados: ',str(archivos_descartados), 'Porcebtaje: ', str((archivos_descartados/753*100)))
-
-
+    print('Number of discarded files: ',str(discarded_files), 'Percentage: ', str((discarded_files/753*100)))
 
   
-    #Step 5: 
+    #Step 5: Appending meteorological information by using meteostat.
     print("Executing step 5...")
     
     print("Process completed.")
