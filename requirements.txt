@@ -31,3 +31,6 @@ Werkzeug==2.2.2
 
 #IMPORTANT: this library is installed only to avoid issues with reading notebooks in Cloudera.
 pyspark==3.5.1
+
+#IMPORTANT: this library is installed only to solve a problem with Scrapy.
+Twisted==22.10.0
