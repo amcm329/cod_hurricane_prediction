@@ -25,7 +25,6 @@ environment_variables:
     default: "yes"
     description: "Specifying the usage of a prebuilt model"
 
-    
 #---------------------------------------------------------
 ##################### Runtime section ####################
 #---------------------------------------------------------
