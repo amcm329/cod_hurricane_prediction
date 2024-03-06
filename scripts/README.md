@@ -39,9 +39,9 @@ To run the model training process as a job, create a new job by going to the Pro
 * **Schedule**: Manual
 * **Engine Profile**: 2 vCPU / 4 GiB
 
-  The rest can be left as is. Once the job has been created, click **Run** to start a manual run for that job.
+The rest can be left as is. Once the job has been created, click **Run** to start a manual run for that job.
 
-  **Note**: an environment flag **USE_PREBUILT_MODEL** is related to this process.
+**Note**: an environment flag **USE_PREBUILT_MODEL** is related to this process.
 
 
 ### 05 - Model Serve
