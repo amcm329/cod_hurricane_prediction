@@ -72,15 +72,19 @@ def main():
              if model_enpoint is not None and model_access_key is not None:
                 print("API call")
 
-                #Example
-                #r = requests.post(model_endpoint, data="{'accessKey':{0}, 'request':{'feature':\"0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0\")}".format(model_access_key,string_data), headers={'Content-Type': 'application/json'}, timeout=70))
-                
-                #Current request.
-                string_data = "{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}".format(latitude,longitude,pressure,avg_pressure,air_temperature,dew_point,humidity,wind_direction,avg_windspeed,wind_speed_ratio)
-                #r = requests.post(model_endpoint, data="{'accessKey':{0}, 'request':{'feature':\"{1}\")}".format(model_access_key,string_data), headers={'Content-Type': 'application/json'}, timeout=70))
-                #prediction = r["result"]
-              
-                prediction = model.predict(transformed_variables)[0]
+                try: 
+                    data_dict = { "accessKey": model_access_key,
+                                  #"request": {'feature':"0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0"}, #default request.
+                                  "request": {"feature": "{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}".format(latitude,longitude,pressure,avg_pressure,air_temperature,dew_point,humidity,wind_direction,avg_windspeed,wind_speed_ratio)}
+                    }                            
+
+                    r = requests.post(model_endpoint, json=data_dict, headers={'Content-Type': 'application/json'}, timeout=70)
+                    prediction = float(json.loads(r.content.decode('utf-8'))["response"]["result"])
+
+
+                except: 
+                    print("There was a problem with the API call to: ", model_endpoint)
+                    prediction = model.predict(transformed_variables)[0]
                
                   
              else:
