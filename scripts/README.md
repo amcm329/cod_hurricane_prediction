@@ -7,12 +7,12 @@ In order to execute the module manually, follow these steps. It is important to 
 
 **Note**: this step *must* be executed in the beginning.
 
-Open the file `scripts/01_install_dependencies.py` in a normal workbench Python3 session. A 1 CPU / 2 GB instance is enough. Then **Run > Run All Lines**
+Open the file `scripts/install_dependencies.py` in a normal workbench Python3 session. A 1 CPU / 2 GB instance is enough. Then **Run > Run All Lines**
 
 
 ### 02 - Download and clean data (Optional)
 
-Open the file `scripts/022_transform_and_load_data.py` in a normal workbench Python3 session. A 2 CPU / 4 GB instance is desirable. Then **Run > Run All Lines**
+Open the file `scripts/transform_and_load_data.py` in a normal workbench Python3 session. A 2 CPU / 4 GB instance is desirable. Then **Run > Run All Lines**
 
 **Note**: this step relies on the API Meteostat and because of it, a lag might be present.
 
@@ -23,7 +23,7 @@ Open the file `scripts/022_transform_and_load_data.py` in a normal workbench Pyt
 
 This is a Jupyter Notebook that does some basic data exploration and visualization. It is here to show how this would be part of the data science workflow.
 
-Open a **JupyterLab** session: Python3, 2 CPU, 4 GB and open the `scripts/03_exploratory_data_analysis.ipynb` file. 
+Open a **JupyterLab** session: Python3, 2 CPU, 4 GB and open the `scripts/exploratory_data_analysis.ipynb` file. 
 
 At the top of the page click **Cells > Run All**.
 
@@ -33,7 +33,7 @@ At the top of the page click **Cells > Run All**.
 To run the model training process as a job, create a new job by going to the Project window and clicking _Jobs > New Job_ and entering the following settings:
 
 * **Name** : Train Model
-* **Script** : scripts/04_train_model.py
+* **Script** : scripts/train_model.py
 * **Arguments** : _Leave blank_
 * **Kernel** : Python 3
 * **Schedule** : Manual
@@ -50,7 +50,7 @@ To deploy the model that was trained in the previous step: from  to the Project 
 
 * **Name**: Hurricane prediction model API endpoint
 * **Description**: This model api endpoint predicts wind speeds
-* **File**: scripts/05_model_serve.py
+* **File**: scripts/model_serve.py
 * **Function**: predict_wind_speed
 * **Kernel**: Python 3
 * **Engine Profile**: 2vCPU / 4 GiB Memory
@@ -62,7 +62,7 @@ CECALT application concatenates all analytical power with a simple yet powerful 
 
 * **Name**:  CECALT Application
 * **Subdomain**: hurricane-prediction
-* **Script**: scripts/06_launch_app.py
+* **Script**: scripts/launch_app.py
 * **Kernel**: Python 3
 * **Engine Profile**: 1vCPU / 2 GiB Memory
 
