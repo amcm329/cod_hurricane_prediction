@@ -3,7 +3,7 @@ In this code the generation of an endpoint for the model prediction takes place.
 """
 
 import os
-import cdsw
+#import cdsw
 import json
 import pickle
 import numpy as np
@@ -39,7 +39,7 @@ else:
    pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/pipeline.pkl") 
 
 
-@cdsw.model_metrics
+#@cdsw.model_metrics
 def predict_wind_speed(args):
 
     inputs = args["feature"].split(",")
@@ -61,8 +61,8 @@ def predict_wind_speed(args):
 
     prediction = model.predict(transformed_variables)[0]
      
-    cdsw.track_metric("input_data", args)
-    cdsw.track_metric("prediction", float(prediction))
+    #cdsw.track_metric("input_data", args)
+    #cdsw.track_metric("prediction", float(prediction))
 
     response = {
                  "original_input": {
