@@ -23,8 +23,8 @@ if full_path is None:
    IMPORTANT: these values are relevant to call the model endpoint, that is why it's recommended that 
    both the model deployment and the application initialization be enabled in separate steps.
 """
-model_endpoint = None # Example: 'http://modelservice.cdsw.44.232.253.206.nip.io/model'
-model_access_key = None # Example: "m03jfhnxm1ea6hhdoia94qa3p0kceuse"
+model_endpoint = None # Put here your model endpoint
+model_access_key = None # Put here your access key
 
 #-----------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------
@@ -70,15 +70,18 @@ def main():
         #https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-model-access-key.html          
         try:
              if model_enpoint is not None and model_access_key is not None:
-                #Example
-                #r = requests.post(model_endpoint,timeout=70, data="{'accessKey':{0}, 'request':{'feature':\"0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0\")}, headers={'Content-Type': 'application/json'}}, timeout=70").format(model_access_key,string_data))
-                string_data = "{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}".format(latitude,longitude,pressure,avg_pressure,air_temperature,dew_point,humidity,wind_direction,avg_windspeed,wind_speed_ratio)
-                #r = requests.post(model_endpoint,timeout=70, data="{'accessKey':{0}, 'request':{'feature':\"{1}\")}, headers={'Content-Type': 'application/json'}}, timeout=70").format(model_access_key,string_data))
+                print("API call")
 
+                #Example
+                #r = requests.post(model_endpoint, data="{'accessKey':{0}, 'request':{'feature':\"0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0\")}".format(model_access_key,string_data), headers={'Content-Type': 'application/json'}, timeout=70))
+                
+                #Current request.
+                string_data = "{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}".format(latitude,longitude,pressure,avg_pressure,air_temperature,dew_point,humidity,wind_direction,avg_windspeed,wind_speed_ratio)
+                #r = requests.post(model_endpoint, data="{'accessKey':{0}, 'request':{'feature':\"{1}\")}".format(model_access_key,string_data), headers={'Content-Type': 'application/json'}, timeout=70))
+                #prediction = r["result"]
+              
                 prediction = model.predict(transformed_variables)[0]
                
-                #prediction = r["result"]
-                print("API call")
                   
              else:
                 prediction = model.predict(transformed_variables)[0]
