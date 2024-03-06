@@ -136,7 +136,7 @@ def execute_training():
 if __name__ == "__main__":
 
     #If the option is whether explicit or it doesn't exist, we use the prebuilt model.
-    if os.environ["USE_PREBUILT_MODEL"] == "yes" or os.environ["USE_PREBUILT_MODEL"] is None:
+    if os.environ["TRAIN_MODEL_FLAG"] == "yes" or os.environ["TRAIN_MODEL_FLAG"] is None:
         print("Using prebuilt model")
          
     else:
