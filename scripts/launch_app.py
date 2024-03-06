@@ -70,8 +70,15 @@ def main():
         #https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-model-access-key.html          
         try:
              if model_enpoint is not None and model_access_key is not None:
-                #r = requests.post(model_endpoint, data='{"accessKey": model_access_key,"request":{"feature":"0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0"}}', headers={'Content-Type': 'application/json'}, timeout = 60)  
+                #Example
+                #r = requests.post(model_endpoint,timeout=70, data="{'accessKey':{0}, 'request':{'feature':\"0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0\")}, headers={'Content-Type': 'application/json'}}, timeout=70").format(model_access_key,string_data))
+                string_data = "{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}".format(latitude,longitude,pressure,avg_pressure,air_temperature,dew_point,humidity,wind_direction,avg_windspeed,wind_speed_ratio)
+                #r = requests.post(model_endpoint,timeout=70, data="{'accessKey':{0}, 'request':{'feature':\"{1}\")}, headers={'Content-Type': 'application/json'}}, timeout=70").format(model_access_key,string_data))
+
+                prediction = model.predict(transformed_variables)[0]
+               
                 #prediction = r["result"]
+                print("API call")
                   
              else:
                 prediction = model.predict(transformed_variables)[0]
