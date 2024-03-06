@@ -21,6 +21,10 @@ environment_variables:
     default: "no"
     description: "Specifying if a ETL operation takes place and therefore, getting an updated input"
 
+  TRAIN_MODEL_FLAG: 
+    default: "no"
+    description: "Indicating if the model has to be trained"
+    
   USE_PREBUILT_MODEL: 
     default: "yes"
     description: "Specifying the usage of a prebuilt model"
