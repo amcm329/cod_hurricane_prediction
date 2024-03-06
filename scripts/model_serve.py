@@ -28,7 +28,7 @@ pipeline = None
 
 #Reading both model and pipeline objects. Unless we are told otherwise, we take the 
 #path with the prebuilt elements.
-if os.environ["TRAIN_MODEL_FLAG"] == "yes" or os.environ["TRAIN_MODEL_FLAG"] is None:
+if os.environ["USE_PREBUILT_MODEL"] == "yes" or os.environ["USE_PREBUILT_MODEL"] is None:
    print("Using prebuilt model")
    model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
    pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl") 
