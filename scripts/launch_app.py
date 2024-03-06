@@ -70,7 +70,7 @@ def main():
         #https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-model-access-key.html          
         try:
              if model_enpoint is not None and model_access_key is not None:
-                #r = requests.post(model_endpoint, data='{"accessKey": model_access_key,"request":{"feature":"0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0"}}', headers={'Content-Type': 'application/json'})  
+                #r = requests.post(model_endpoint, data='{"accessKey": model_access_key,"request":{"feature":"0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0"}}', headers={'Content-Type': 'application/json'}, timeout = 60)  
                 #prediction = r["result"]
                   
              else:
