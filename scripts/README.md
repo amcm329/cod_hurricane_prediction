@@ -75,4 +75,4 @@ Then click "Create Application". After the Application deploys, click on the blu
 ----
 **Note**: there is no automated way to connect both steps **model deployment** and **application**, in other words, if a model api connection wants to be established then step 06 must be executed separately and bu filling the following information in **launch_app.apy**:
 
-![INSTRUCTIONS](static/INSTRUCTIONS.PNG)
+![INSTRUCTIONS](static/INSTRUCTIONS.png)
