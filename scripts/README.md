@@ -73,7 +73,7 @@ CECALT application concatenates all analytical power with a simple yet powerful 
 Then click "Create Application". After the Application deploys, click on the blue-arrow next to the name to launch the application in a new window.
 
 ----
-**Note**: there is no automated way to connect both steps **model deployment** and **application**, in other words, if a model api connection wants to be established then step regarding **application** must be executed separately by following these instructions:
+**Note**: there is no automated way to connect both steps **model deployment** and **application**, in other words, if a model api connection wants to be established, then step regarding **application** must be executed separately by following these instructions:
 
 1.- Based on the model deployment, follow this site and copy the elements **model endpoint and access key (colors green and red respectively)**.
 
