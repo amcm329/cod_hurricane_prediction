@@ -296,7 +296,7 @@ def clean_and_transform_data():
 
     #Step 1: retrieving all the valid urls from the NOAA website.
     print("Executing step 1...")
-    !scrapy runspider  /home/cdsw/scripts/021_download_data.py
+    !scrapy runspider  /home/cdsw/scripts/download_data.py
   
     #-------------------------------------------------------------------
     #-------------------------------------------------------------------
