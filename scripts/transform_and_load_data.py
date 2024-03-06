@@ -1,6 +1,6 @@
 """
   The following code performs these operations: 
-  1.- Calls 021_download_data.py to get the URLs of pdfs related to hurricanes.
+  1.- Calls download_data.py to get the URLs of pdfs related to hurricanes.
   2.- Dumps information from the pdfs and saves it as txts.
   3.- Checks each one of the txts and extracts only quantitative information. 
   regarding hurricane behavior.
