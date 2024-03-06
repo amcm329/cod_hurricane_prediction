@@ -104,7 +104,7 @@ tasks:
     name: Hurricane prediction model endpoint
     entity_label: hurricane_model
     description: This model api endpoint predicts wind speeds
-    short_summary: Create the hurricane prediction model api endpoint
+    short_summary: Create hurricane prediction model api endpoint
   
   - type: build_model
     name: Hurricane prediction model API endpoint
