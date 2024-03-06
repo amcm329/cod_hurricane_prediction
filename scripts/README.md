@@ -32,12 +32,12 @@ At the top of the page click **Cells > Run All**.
 
 To run the model training process as a job, create a new job by going to the Project window and clicking _Jobs > New Job_ and entering the following settings:
 
-* **Name** : Train Model
-* **Script** : scripts/train_model.py
-* **Arguments** : _Leave blank_
-* **Kernel** : Python 3
-* **Schedule** : Manual
-* **Engine Profile** : 2 vCPU / 4 GiB
+* **Name**: Train Model
+* **Script**: scripts/train_model.py
+* **Arguments**: _Leave blank_
+* **Kernel**: Python 3
+* **Schedule**: Manual
+* **Engine Profile**: 2 vCPU / 4 GiB
 
   The rest can be left as is. Once the job has been created, click **Run** to start a manual run for that job.
 
