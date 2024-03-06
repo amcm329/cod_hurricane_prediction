@@ -18,6 +18,8 @@ Open the file `scripts/transform_and_load_data.py` in a normal workbench Python3
 
 **Note**: an environment flag **ETL_OPERATIONS** is related to this process.
 
+**Note**: this process automatically calls `scripts/download_data.py`.
+
 
 ### 03 - Exploratory Data Analysis (Optional)
 
