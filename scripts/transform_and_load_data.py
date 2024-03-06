@@ -484,80 +484,85 @@ def clean_and_transform_data():
             print(csv_path + element)
             list_of_dfs.append(pd.read_csv(csv_path + element))
 
-    df = pd.concat(list_of_dfs)
-    df.columns = ["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed","stage"]
-    df = df[["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed"]]
+    df = None
+    if len(list_of_dfs) > 0:
+       df = pd.concat(list_of_dfs)
+       df.columns = ["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed","stage"]
+       df = df[["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed"]]
 
-    #IMPORTANT: since too many calls to the API will cause a DDoS, we are processing al the rows in batch.
+       #IMPORTANT: since too many calls to the API will cause a DDoS, we are processing al the rows in batch.
 
-    final_dfs = []
+       final_dfs = []
 
-    #These variables are created to calculate the number of chunks.
-    remaining_data_elements = df.count()["sequential_id"]
-    number_of_batches = 10
-    how_many_processes = number_of_batches
-    how_many_elements =  remaining_data_elements
-    lower_limit = 0
-    upper_limit = 0
-    my_counter = 0
-    i = 0
+       #These variables are created to calculate the number of chunks.
+       remaining_data_elements = df.count()["sequential_id"]
+       number_of_batches = 10
+       how_many_processes = number_of_batches
+       how_many_elements =  remaining_data_elements
+       lower_limit = 0
+       upper_limit = 0
+       my_counter = 0
+       i = 0
 
-    a = time.time()
-    print("-------------------------------------------------")
-    print("-----Starting transformation....")
+       a = time.time()
+       print("-------------------------------------------------")
+       print("-----Starting transformation....")
 
-    #Creating as much processes as chunks needed.
-    for i in range(1,number_of_batches):
+       #Creating as much processes as chunks needed.
+       for i in range(1,number_of_batches):
 
-               how_many_elements = int(math.ceil(remaining_data_elements/how_many_processes))
-               upper_limit += how_many_elements
+                  how_many_elements = int(math.ceil(remaining_data_elements/how_many_processes))
+                  upper_limit += how_many_elements
 
-               #Getting a subset to be used for each Process
-               current_df = df.iloc[lower_limit:upper_limit,:]
-               current_df = current_df.apply(closest_stations, axis = 1)
-               current_df = current_df.apply(meteorological_info, axis = 1)
+                  #Getting a subset to be used for each Process
+                  current_df = df.iloc[lower_limit:upper_limit,:]
+                  current_df = current_df.apply(closest_stations, axis = 1)
+                  current_df = current_df.apply(meteorological_info, axis = 1)
 
-               #print(current_df)
-               print("               ........................................................", i)
+                  #print(current_df)
+                  print("               ........................................................", i)
 
-               final_dfs.append(current_df)
+                  final_dfs.append(current_df)
 
-               b = time.time()
-               result1 = (b-a)/60
-               print("Elapsed time first stage (minutes): ",result1)
+                  b = time.time()
+                  result1 = (b-a)/60
+                  print("Elapsed time first stage (minutes): ",result1)
 
-               how_many_processes -= 1
-               lower_limit = upper_limit + 1
-               remaining_data_elements -= how_many_elements
-               my_counter += 1
+                  how_many_processes -= 1
+                  lower_limit = upper_limit + 1
+                  remaining_data_elements -= how_many_elements
+                  my_counter += 1
 
-    print("Last elements to be processed")
+       print("Last elements to be processed")
 
-    #This part corresponds to the last Process and more specifically, to the remaining data to be assigned.
-    i+=1
-    my_counter += 1
+       #This part corresponds to the last Process and more specifically, to the remaining data to be assigned.
+       i+=1
+       my_counter += 1
 
-    upper_limit += remaining_data_elements
-    current_df = df.iloc[lower_limit:upper_limit,:]
-    current_df = current_df.apply(closest_stations, axis = 1)
-    current_df = current_df.apply(meteorological_info, axis = 1)
-    final_dfs.append(current_df)
+       upper_limit += remaining_data_elements
+       current_df = df.iloc[lower_limit:upper_limit,:]
+       current_df = current_df.apply(closest_stations, axis = 1)
+       current_df = current_df.apply(meteorological_info, axis = 1)
+       final_dfs.append(current_df)
 
-    c = time.time()
-    df2 = pd.concat(final_dfs)
-    print("-------------------------------------------------")
-    result3 = (c-a)/60
-    print("Elapsed time ALL (minutes): ",result3)  
+       c = time.time()
+       df2 = pd.concat(final_dfs)
+       print("-------------------------------------------------")
+       result3 = (c-a)/60
+       print("Elapsed time ALL (minutes): ",result3)  
 
-    #Subsetting dataframe.
-    df2 = df2[["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed","wdir", "temp", "dwpt", "rhum", "prcp", "coco","final_press","final_wspd"]]
+       #Subsetting dataframe.
+       df2 = df2[["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed","wdir", "temp", "dwpt", "rhum", "prcp", "coco","final_press","final_wspd"]]
 
-    #Renaming dataframe.
-    df2.columns = ["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed","wind_direction","air_temperature","dew_point","relative_humidity","precipitation","condition_code","final_press","final_wspd"]
+       #Renaming dataframe.
+       df2.columns = ["sequential_id","name","timestamp_utc","latitude","longitude","pressure","wind_speed","wind_direction","air_temperature","dew_point","relative_humidity","precipitation","condition_code","final_press","final_wspd"]
 
-    df2.to_csv(os.getenv("OPERATING_SYSTEM_PATH") + "src/data/semi_raw_meteorological_dataset_2.csv",index=False)
+       df2.to_csv(os.getenv("OPERATING_SYSTEM_PATH") + "src/data/semi_raw_meteorological_dataset_2.csv",index=False)
 
-    print("Process completed.")
+       print("Process completed.")
+
+    else: 
+       print("There were no elements to process.")
 
 #---------------------------------------------------------
 ###################### Main section ######################
