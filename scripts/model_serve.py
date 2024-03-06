@@ -24,28 +24,19 @@ if full_path is None:
 model = None
 pipeline = None
 
-#If the option is whether explicit or it doesn't exist, we use the prebuilt model.
-if os.environ["TRAIN_MODEL_FLAG"] == "yes" or os.environ["TRAIN_MODEL_FLAG"] is None:
-        print("Using prebuilt model")
-
-else: 
-  
-model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
-pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl") 
+#Paths don't start with slash.
 
 #Reading both model and pipeline objects. Unless we are told otherwise, we take the 
-#path with the prebuilt elements. 
+#path with the prebuilt elements.
+if os.environ["TRAIN_MODEL_FLAG"] == "yes" or os.environ["TRAIN_MODEL_FLAG"] is None:
+   print("Using prebuilt model")
+   model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
+   pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl") 
 
-#with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl",'rb') as f:
-#     model = pickle.load(f)
-         
-#with open(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl",'rb') as f2:
-#     pipeline = pickle.load(f2)
-
-#This doesn't start with slash
-#model = joblib.load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
-#pipeline = joblib.load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl")
-
+else: 
+   print("Using current model")
+   model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/ensemble_model3.pkl")
+   pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/models/pipeline.pkl") 
 
 
 @cdsw.model_metrics
