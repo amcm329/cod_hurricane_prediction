@@ -1,17 +1,36 @@
+"""
+  This code launches a Flask server to enable the app and also handle model requests.
+"""
+
 import os
 import flask
 import pickle
 import requests
 from joblib import load
 
-
+#Checking path environment variable.
 full_path = os.getenv("OPERATING_SYSTEM_PATH")
      
 if full_path is None: 
    #Element doesn't exist.
    os.environ["OPERATING_SYSTEM_PATH"] = "/home/cdsw/"
 
-#This doesn't start with slash
+#-----------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------
+
+"""
+   IMPORTANT: these values are relevant to call the model endpoint, that is why it's recommended that 
+   both the model deployment and the application initialization be enabled in separate steps.
+"""
+model_endpoint = None # Example: 'http://modelservice.cdsw.44.232.253.206.nip.io/model'
+model_access_key = None # Example: "m03jfhnxm1ea6hhdoia94qa3p0kceuse"
+
+#-----------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------
+
+#As a security measure, we load the prebuilt model in case the model endpoint fails.
 model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
 pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl")
 
@@ -48,15 +67,15 @@ def main():
         #We couldn't find a way of automatically call a model endpoint since apparently theres no chance of
         #retrieving the access key BEFORE the deployment, or there isn't a free way of getting access either.
         
-         #https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-model-access-key.html 
-         
-        #We put the theoretical implementation but in the meantime, we have the prebuilt models working. 
+        #https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-model-access-key.html          
         try:
-           import requests
-           prediction = model.predict(transformed_variables)[0]
-           #r = requests.post('http://modelservice.cdsw.44.232.253.206.nip.io/model', data='{"accessKey":"m03jfhnxm1ea6hhdoia94qa3p0kceuse","request":{"feature":"0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0"}}', headers={'Content-Type': 'application/json'})  
-           #prediction = r["result"]
-        
+             if model_enpoint is not None and model_access_key is not None:
+                #r = requests.post(model_endpoint, data='{"accessKey": model_access_key,"request":{"feature":"0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0"}}', headers={'Content-Type': 'application/json'})  
+                #prediction = r["result"]
+                  
+             else:
+                prediction = model.predict(transformed_variables)[0]
+           
         except:     
            prediction = model.predict(transformed_variables)[0]
   
