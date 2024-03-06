@@ -11,6 +11,9 @@ import pandas as pd
 #Example:
 #args = { "feature": "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" } 
 
+model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
+pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl") 
+
 #Reading both model and pipeline objects. Unless we are told otherwise, we take the 
 #path with the prebuilt elements. 
 
@@ -28,8 +31,6 @@ import pandas as pd
 
 @cdsw.model_metrics
 def predict_wind_speed(args):
-    model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
-    pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl") 
 
     inputs = args["feature"].split(",")
 
