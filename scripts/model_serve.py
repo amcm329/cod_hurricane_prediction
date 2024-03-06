@@ -1,20 +1,35 @@
+"""
+In this code the generation of an endpoint for the model prediction takes place.
+"""
+
 import os
-from joblib import dump, load
 import cdsw
 import json
 import pickle
 import numpy as np
 import pandas as pd
-
-#In this code the generation of an endpoint for the model prediction takes place.
+from joblib import dump, load
 
 #Example:
 #args = { "feature": "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" } 
 
+#Checking path environment variable.
+full_path = os.getenv("OPERATING_SYSTEM_PATH")
+     
+if full_path is None: 
+   #Element doesn't exist.
+   os.environ["OPERATING_SYSTEM_PATH"] = "/home/cdsw/"
+
+#Variables used for prediction purposes.
+model = None
+pipeline = None
+
 #If the option is whether explicit or it doesn't exist, we use the prebuilt model.
-  if os.environ["TRAIN_MODEL_FLAG"] == "yes" or os.environ["TRAIN_MODEL_FLAG"] is None:
+if os.environ["TRAIN_MODEL_FLAG"] == "yes" or os.environ["TRAIN_MODEL_FLAG"] is None:
         print("Using prebuilt model")
 
+else: 
+  
 model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
 pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl") 
 
