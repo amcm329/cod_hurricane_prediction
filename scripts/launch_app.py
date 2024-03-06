@@ -67,32 +67,34 @@ def main():
         #We couldn't find a way of automatically call a model endpoint since apparently theres no chance of
         #retrieving the access key BEFORE the deployment, or there isn't a free way of getting access either.
         
-        #https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-model-access-key.html          
-        try:
-             if model_enpoint is not None and model_access_key is not None:
-                print("API call")
+        #https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-model-access-key.html  
+      
+        if model_enpoint is not None and model_access_key is not None:
+           print("API call")
 
-                try: 
-                    data_dict = { "accessKey": model_access_key,
-                                  #"request": {'feature':"0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0"}, #default request.
-                                  "request": {"feature": "{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}".format(latitude,longitude,pressure,avg_pressure,air_temperature,dew_point,humidity,wind_direction,avg_windspeed,wind_speed_ratio)}
-                    }                            
+           try: 
+               #Creating data object to send information.
+               data_dict = { 
+                            "accessKey": model_access_key,
+                            #"request": {'feature': "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" }, #default request.
+                            "request": {"feature": "{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}".format(latitude,longitude,pressure,avg_pressure,air_temperature,dew_point,humidity,wind_direction,avg_windspeed,wind_speed_ratio) }
+                           }                            
 
-                    r = requests.post(model_endpoint, json=data_dict, headers={'Content-Type': 'application/json'}, timeout=70)
-                    prediction = float(json.loads(r.content.decode('utf-8'))["response"]["result"])
+               #Sending request.
+               r = requests.post(model_endpoint, json=data_dict, headers={'Content-Type': 'application/json'}, timeout=70)
 
+               #Retrieving information.
+               prediction = float(json.loads(r.content.decode('utf-8'))["response"]["result"])
 
-                except: 
-                    print("There was a problem with the API call to: ", model_endpoint)
-                    prediction = model.predict(transformed_variables)[0]
-               
-                  
-             else:
-                prediction = model.predict(transformed_variables)[0]
+           except: 
+               print("There was a problem with the API call to: ", model_endpoint)
+               print("Returning to local prediction")
+               prediction = model.predict(transformed_variables)[0]
+                        
+        else:
+            print("Local prediction")
+            prediction = model.predict(transformed_variables)[0]
            
-        except:     
-           prediction = model.predict(transformed_variables)[0]
-  
         return flask.render_template('index.html',
                                      original_input = {'Latitude':latitude,'Longitude':longitude,'Pressure':pressure, 
                                                       'Average Pressure':avg_pressure,'Air Temperature':air_temperature,
