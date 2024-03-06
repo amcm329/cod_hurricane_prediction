@@ -1,4 +1,4 @@
-<p style="text-align: center;"># CECALT Hurricane Behavior Predictor</p>
+# CECALT Hurricane Behavior Predictor
 
 CECALT **(CEnter of meteorologiCAL Technology)** is an integral project whose objective is to increase the sensitivity of hurricane prediction systems. It contains all the code and data needed to deploy an end-to-end machine learning project on a running CML instance.
 
