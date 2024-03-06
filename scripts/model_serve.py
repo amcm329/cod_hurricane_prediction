@@ -11,6 +11,10 @@ import pandas as pd
 #Example:
 #args = { "feature": "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" } 
 
+#If the option is whether explicit or it doesn't exist, we use the prebuilt model.
+  if os.environ["TRAIN_MODEL_FLAG"] == "yes" or os.environ["TRAIN_MODEL_FLAG"] is None:
+        print("Using prebuilt model")
+
 model = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/ensemble_model3.pkl")
 pipeline = load(os.getenv("OPERATING_SYSTEM_PATH") + "src/prebuilt-models/pipeline.pkl") 
 
