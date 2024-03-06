@@ -2,14 +2,14 @@
 
 In order to execute the module manually, follow these steps. It is important to mention that, inside each one of the codes, there are explanations and hints on how to properly execute them.
 
-
+----
 ### 01 - Install dependencies
 
 **Note**: this step *must* be executed in the beginning.
 
 Open the file `scripts/install_dependencies.py` in a normal workbench Python3 session. A 1 CPU / 2 GB instance is enough. Then **Run > Run All Lines**
 
-
+----
 ### 02 - Download and clean data (Optional)
 
 Open the file `scripts/transform_and_load_data.py` in a normal workbench Python3 session. A 2 CPU / 4 GB instance is desirable. Then **Run > Run All Lines**
@@ -20,7 +20,7 @@ Open the file `scripts/transform_and_load_data.py` in a normal workbench Python3
 
 **Note**: this process automatically calls `scripts/download_data.py`.
 
-
+----
 ### 03 - Exploratory Data Analysis (Optional)
 
 This is a Jupyter Notebook that does some basic data exploration and visualization. It is here to show how this would be part of the data science workflow.
@@ -29,7 +29,7 @@ Open a **JupyterLab** session: Python3, 2 CPU, 4 GB and open the `scripts/explor
 
 At the top of the page click **Cells > Run All**.
 
-
+----
 ### 04 - Model Train
 
 To run the model training process as a job, create a new job by going to the Project window and clicking _Jobs > New Job_ and entering the following settings:
@@ -45,7 +45,7 @@ The rest can be left as is. Once the job has been created, click **Run** to star
 
 **Note**: an environment flag **TRAIN_MODEL_FLAG** is related to this process.
 
- 
+---- 
 ### 05 - Model Serve
 
 To deploy the model that was trained in the previous step: from  to the Project page, click **Models > New Model** and create a new model with the following details:
@@ -59,7 +59,7 @@ To deploy the model that was trained in the previous step: from  to the Project 
 
 **Note**: an environment flag **USE_PREBUILT_MODEL** is related to this process.
 
-
+----
 ### 06 - Application
 
 CECALT application concatenates all analytical power with a simple yet powerful graphical interface. In order to enable it you must go to the **Applications** section and select "New Application" with the following:
@@ -73,4 +73,3 @@ CECALT application concatenates all analytical power with a simple yet powerful 
 Then click "Create Application". After the Application deploys, click on the blue-arrow next to the name to launch the application in a new window.
 
 **Note**: it might require some credentials to log in, these are the same ones provided for the Workbench.
-
