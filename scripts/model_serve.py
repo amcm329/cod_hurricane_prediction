@@ -2,6 +2,9 @@
 In this code the generation of an endpoint for the model prediction takes place.
 """
 
+#Note for technical support: we detected that the usage of cdsw library caused timeout errors during the model call.
+#We commented it and all its functionalities but we left the code in case you want to debug it.
+
 import os
 #import cdsw
 import json
