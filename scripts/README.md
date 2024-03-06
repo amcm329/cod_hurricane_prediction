@@ -41,9 +41,9 @@ To run the model training process as a job, create a new job by going to the Pro
 
 The rest can be left as is. Once the job has been created, click **Run** to start a manual run for that job.
 
-**Note**: an environment flag **USE_PREBUILT_MODEL** is related to this process.
+**Note**: an environment flag **TRAIN_MODEL_FLAG** is related to this process.
 
-
+ 
 ### 05 - Model Serve
 
 To deploy the model that was trained in the previous step: from  to the Project page, click **Models > New Model** and create a new model with the following details:
@@ -54,6 +54,8 @@ To deploy the model that was trained in the previous step: from  to the Project 
 * **Function**: predict_wind_speed
 * **Kernel**: Python 3
 * **Engine Profile**: 2vCPU / 4 GiB Memory
+
+**Note**: an environment flag **USE_PREBUILT_MODEL** is related to this process.
 
 
 ### 06 - Application
