@@ -69,7 +69,7 @@ def main():
         
         #https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-model-access-key.html  
       
-        if model_enpoint is not None and model_access_key is not None:
+        if model_endpoint is not None and model_access_key is not None:
            print("API call")
 
            try: 
