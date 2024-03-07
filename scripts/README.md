@@ -81,4 +81,6 @@ Then click "Create Application". After the Application deploys, click on the blu
 
 2.- Go to the code **launch_app.py** and replace the mentioned values in this section:
 
+![INSTRUCTIONS](../static/INSTRUCTIONS2.png)
+
 3.- Execute step 06 - Application as usual.
