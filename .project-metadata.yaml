@@ -3,7 +3,7 @@
 #---------------------------------------------------------
   
 name: CECALT Hurricane Behavior Predictor
-description: CECALT is an integral solution which contributes to hurricane prediction sensitivity.
+description: CECALT (CEnter of meteorologiCAL Technology) is an integral solution which contributes to hurricane prediction sensitivity.
 author:  Aaron Castillo, Javier Sanchez, Gilberto Subias.
 specification_version: 1.0
 prototype_version: 1.0
