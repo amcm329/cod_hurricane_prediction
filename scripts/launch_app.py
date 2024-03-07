@@ -74,18 +74,19 @@ def main():
 
            try: 
                #Creating data object to send information.
-               data_dict = { 
+               #data_dict = { 
                             "accessKey": model_access_key,
                             #"request": {'feature': "0.0000,0.0000,100,950,0.0,0.0,0.0,0.0,0.0,0.0" }, #default request.
                             "request": {"feature": "{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}".format(latitude,longitude,pressure,avg_pressure,air_temperature,dew_point,humidity,wind_direction,avg_windspeed,wind_speed_ratio) }
                            }                            
 
                #Sending request.
-               r = requests.post(model_endpoint, json=data_dict, headers={'Content-Type': 'application/json'}, timeout=70)
+               #r = requests.post(model_endpoint, json=data_dict, headers={'Content-Type': 'application/json'}, timeout=70)
 
                #Retrieving information.
-               prediction = float(json.loads(r.content.decode('utf-8'))["response"]["result"])
-
+               #prediction = float(json.loads(r.content.decode('utf-8'))["response"]["result"])
+                prediction = model.predict(transformed_variables)[0]
+          
            except: 
                print("There was a problem with the API call to: ", model_endpoint)
                print("Returning to local prediction")
