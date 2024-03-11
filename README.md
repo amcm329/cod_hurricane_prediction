@@ -53,7 +53,7 @@ The ways of executing the project are the following ones:
 
 ----
 ### **Note**
-In general, the project contains mechanisms to guarantee a safe execution but if anything happens, it would be desirable to check both the [documentation](`CECALT Hurricane Behavior Predictor_SOP.pdf`) and the [technical configuration](scripts/README.md).
+In general, the project contains mechanisms to guarantee a safe execution but if anything happens, it would be desirable to check both the [documentation](CECALT\ Hurricane\ Behavior\ Predictor_SOP.pdf) and the [technical configuration](scripts/README.md).
 
 ----
 ### **IMPORTANT**
